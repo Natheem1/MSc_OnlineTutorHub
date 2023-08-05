@@ -3,8 +3,8 @@ from django.shortcuts import render
 
 
 def subjects(request):
-    return render(request, 'subjects.html')
+    return render(request, 'subjects/subjects.html')
 
 
 def subject(request, pk):
-    return render(request, 'single-subject.html')
+    return render(request, 'subjects/single-subject.html')
