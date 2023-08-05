@@ -1,9 +1,18 @@
 {% extends 'main.html' %}
-
-
 {% block content  %}
 
+{{message}}
+
+<hr>
+
 <h1> Subjects Template </h1>
-<p> test test test test  </p>
+
+
+<ul>
+    {% for subject in subjects %}
+        <li>Subject Name: <a href="{% url 'subject' subject.id %}">{{subject.title}}</a> - - - {{subject.description}}</li>
+    {% endfor %}
+</ul>
+
 
 {% endblock content %}
