@@ -25,8 +25,8 @@ class StudentProfile(models.Model):
     education = models.CharField(max_length=200, choices=EDUCATION_LEVEL)
     interested_subjects = models.ManyToManyField('Subject',blank=True)
 
-    profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/', 
-                                      default="profiles/default.png")
+    profile_image = models.ImageField(null=True, blank=True, upload_to='student-profile-img/', 
+                                      default="defaultprofileimg/default.png")
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     parent_name = models.CharField(max_length=150, blank=True, null=True)
@@ -66,8 +66,8 @@ class TutorProfile(models.Model):
     teaching_level = models.ManyToManyField('TeachingLevel', blank=False) 
     hourly_rate = models.CharField(max_length=20, blank=True, null=True)
     teaching_subjects = models.ManyToManyField('Subject',blank=True)
-    profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/', 
-                                      default="profiles/default.png")
+    profile_image = models.ImageField(null=True, blank=True, upload_to='tutor-profile-img/', 
+                                      default="defaultprofileimg/default.png")
     
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, 

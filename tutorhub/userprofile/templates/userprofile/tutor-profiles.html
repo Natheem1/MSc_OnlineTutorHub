@@ -1,0 +1,7 @@
+<h1>TUTOR PROFILES PAGES</h1>
+
+<ul>
+    {% for tutor in tutors %}
+        <li> Tutor Name: {{tutor.username}} - - - - {{tutor.short_intro}}</li>
+    {% endfor %}
+</ul>
