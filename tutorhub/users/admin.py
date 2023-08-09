@@ -9,7 +9,7 @@ class UserConfig(UserAdmin):
     ordering = ['date_joined']
 
     # Displayed fields in the user list view.
-    list_display = ('user_type','email','first_name','is_superuser', 'is_active', 'is_staff' )
+    list_display = ('user_type','email','first_name','last_name','is_superuser', 'is_active')
 
     # Grouping fields in sections for the edit view.
     fieldsets = (
