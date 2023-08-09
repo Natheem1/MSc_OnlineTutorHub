@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     "subjects.apps.SubjectsConfig",
     "users.apps.UsersConfig",
+    "userprofile.apps.UserprofileConfig",
 ]
 
 MIDDLEWARE = [
