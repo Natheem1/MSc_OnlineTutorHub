@@ -7,7 +7,7 @@
 
 <ul>
     {% for tutor in tutors %}
-        <li> Tutor Name: {{tutor.username}} - - - - {{tutor.short_intro}}</li>
+        <li> Tutor Name: <a href="{% url 'tutor' tutor.id %}">{{tutor.username}}</a> - - - - {{tutor.short_intro}}</li>
     {% endfor %}
 </ul>
 

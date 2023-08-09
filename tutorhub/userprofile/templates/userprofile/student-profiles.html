@@ -6,7 +6,7 @@
 <h1> STUDENT PROFILES</h1>
 <ul>
     {% for student in students %}
-        <li> Student Name: {{student.username}} - - - - GOAL:{{student.short_goal}}</li>
+        <li> Student Name: <a href="{% url 'student' student.id %}">{{student.username}}</a> - - - - GOAL:{{student.short_goal}}</li>
     {% endfor %}
 </ul>
 

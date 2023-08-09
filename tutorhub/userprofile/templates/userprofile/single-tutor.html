@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Single Tutor Profile Page</h1>
+<img src="{{tutorObj.profile_image.url}}"/>
+<h3>Name: {{tutorObj.first_name}} {{tutorObj.last_name}}</h3>
+<h3>Email: {{tutorObj.email}}</h3>
+<h3>Location: {{tutorObj.location}}</h3>
+<h3>Hourly Rate: {{tutorObj.hourly_rate}}</h3>
+
+
+
+
+{% endblock content %}

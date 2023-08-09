@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<h1>Single Student Profile</h1>
+<img src="{{studentObj.profile_image.url}}"/>
+<h3>Name: {{studentObj.first_name}} {{studentObj.last_name}}</h3>
+<h3>Email: {{studentObj.email}}</h3>
+<h3>Goal: {{studentObj.short_goal}}</h3>
+<h3>Year Group: {{studentObj.education}}</h3>
+<h3>Parent: {{studentObj.parent_name}}</h3>
+<h3>Preferred Session Time: {{studentObj.preferred_availability}}</h3>
+
+{% endblock content %}
