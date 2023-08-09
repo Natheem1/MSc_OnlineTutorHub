@@ -11,9 +11,16 @@
           <li class="header__menuItem"><a href="{% url 'tutor-profiles'  %}">Expert Tutors</a></li>
           <li class="header__menuItem"><a href="{% url 'subjects' %}">Subjects </a></li>
           <li class="header__menuItem"><a href="">Become a Tutor</a></li>
-          <li class="header__menuItem"><a href="{% url 'student-profiles' %}">Students</a></li>
-          <li class="header__menuItem"><a href="">My Account</a></li>
-          <li class="header__menuItem"><a href="" class="">Login/Sign Up</a></li>
+          <li class="header__menuItem"><a href="{% url 'student-profiles' %}"> Fellow Students</a></li>
+          
+
+          {% if request.user.is_authenticated %}
+           <li class="header__menuItem"><a href="">My Account</a></li>
+          <li class="header__menuItem"><a href="{% url 'logout' %}" class="">Logout</a></li>
+          <li class="header__menuItem"><a style="color: black;">Welcome, {{request.user.first_name|capfirst}}</a></li>
+          {% else %}
+          <li class="header__menuItem"><a href="{% url 'login' %}" class="">Login/Sign Up</a></li>
+          {% endif %}
         </ul>
       </nav>
     

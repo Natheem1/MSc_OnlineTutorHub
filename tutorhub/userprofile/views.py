@@ -1,5 +1,48 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect 
+from django.contrib.auth import login, authenticate, logout
+from users.models import NewUser
 from . models import TutorProfile, StudentProfile
+
+#LOGIN PAGE
+def loginUser(request):
+    page = 'login'
+
+    if request.user.is_authenticated:
+        return redirect('subjects')
+
+
+    if request.method == 'POST':
+        username = request.POST['username'].lower()
+        password = request.POST['password']
+
+        try:
+            user = NewUser.objects.get(username=username)
+        except:
+            print('USERNAME DOES NOT EXIST')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            print('LOGGED IN - WELCOME TO TUTOR HUB')
+            return redirect('tutor-profiles')
+        else:
+            print('LOGIN FAILD - USERNAME OR PASSWORD IS INVALID')
+
+    return render(request, 'userprofile/login-signup.html')
+
+
+#LOGOUT PAGE 
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+#USER REGISTRATION PAGE
+def registerUser(request):
+    page = 'register'
+    context = {'page': page}
+    return render(request, 'userprofile/login-signup.html', context)
+
 
 #ALL TUTOR PROFILES
 def tutorProfiles(request):
