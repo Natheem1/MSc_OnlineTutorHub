@@ -4,10 +4,11 @@ from django.conf import settings
 
 # STUDENT PROFILE TABLE
 class StudentProfile(models.Model):
-    studentuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
                                        null=True, blank=True)
     email = models.EmailField(max_length=500, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
     first_name = models.CharField(max_length=300, blank=True, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     short_goal = models.CharField(max_length=200, blank=True, null=True)
@@ -54,10 +55,11 @@ class StudentProfile(models.Model):
 
 # TUTOR PROFILE TABLE
 class TutorProfile(models.Model):
-    tutoruser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
                                      null=True, blank=True)
     email = models.EmailField(max_length=500, blank=True, null=True)
     username = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
     first_name = models.CharField(max_length=300, blank=True, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     location = models.CharField(max_length=500, blank=True, null=True)
