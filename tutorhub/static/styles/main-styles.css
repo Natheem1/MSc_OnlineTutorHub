@@ -1,0 +1,521 @@
+/*=======================
+ Base Section
+========================*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    color: inherit;
+    font-size: inherit;
+  }
+  
+  html {
+    font-size: 50%;
+  }
+  
+  @media only screen and (min-width: 480px) {
+    html {
+      font-size: 56.25%;
+    }
+  }
+  
+  @media only screen and (min-width: 1200px) {
+    html {
+      font-size: 62.5%;
+    }
+  }
+  
+  @media only screen and (min-width: 2100px) {
+    html {
+      font-size: 75%;
+    }
+  }
+  
+  body {
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    min-height: 100vh;
+  }
+
+
+/*=======================
+ Form Section
+========================*/
+.form {
+    display: block;
+  }
+  
+  .form--inline {
+    display: inline-block;
+  }
+  
+  .form__field {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form__error {
+    color: var(--color-error);
+    font-weight: var(--font-medium);
+    display: block;
+    font-size: 1.4rem;
+  }
+  
+  .form__label,
+  .form__field > label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+  
+  .form__label--inline {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    color: var(--color-text);
+  }
+  
+  .form__label--hidden {
+    position: absolute;
+    text-indent: -9999px;
+  }
+  
+  input.input[type='text'],
+  input.input[type='email'],
+  input.input[type='password'],
+  input.input[type='number'],
+  select.input,
+  textarea.input {
+    min-width: 24rem;
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--color-light);
+    transition: all 0.3s ease-in-out;
+    background-color: var(--color-bg);
+  }
+  
+  input.input[type='text']:focus,
+  input.input[type='email']:focus,
+  input.input[type='password']:focus,
+  input.input[type='number']:focus,
+  input.input[type='text']:active,
+  input.input[type='email']:active,
+  input.input[type='password']:active,
+  input.input[type='number']:active,
+  select.input:focus,
+  select.input:active,
+  textarea.input:focus,
+  textarea.input:active {
+    outline: none;
+    border: 2px solid var(--color-main);
+  }
+  
+  .form__field--radio,
+  .form__field--checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form__field--radio p,
+  .form__field--checkbox p {
+    margin-right: 3rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--color-text);
+  }
+  
+  .form__field--radio input + label,
+  .form__field--checkbox input + label {
+    display: inline-block;
+    margin-left: 1.5rem;
+    margin-right: 2rem;
+    margin-bottom: 0;
+    cursor: pointer;
+    color: var(--color-text);
+  }
+  
+  .input--textarea {
+    width: 100%;
+    min-height: 14rem;
+    resize: none;
+  }
+  
+  .input--textarea--sm {
+    min-height: 8rem;
+  }
+  
+  /* Custom Radio & Checkbox */
+  
+  .input.input--checkbox,
+  .input.input--radio {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .input.input--checkbox::before {
+    transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+    transform: rotate(-45deg) scale(0, 0);
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1.4px;
+    z-index: 1;
+    width: 0.8rem;
+    height: 0.4rem;
+    border: 2.5px solid var(--color-main);
+    border-top-style: none;
+    border-right-style: none;
+  }
+  
+  .input.input--checkbox:checked::before {
+    transform: rotate(-45deg) scale(1, 1);
+  }
+  
+  .input.input--checkbox::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-gray);
+    cursor: pointer;
+  }
+  
+  .input.input--checkbox:checked::after {
+    background: var(--color-main-light);
+    border-color: var(--color-main);
+  }
+  
+  .input.input--radio::before {
+    transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+    transform: scale(0, 0);
+    content: '';
+    position: absolute;
+    left: 3.5px;
+    top: 2.5px;
+    z-index: 1;
+    width: 0.9rem;
+    height: 0.9rem;
+    background: var(--color-main);
+    border-radius: 50%;
+  }
+  
+  .input.input--radio:checked::before {
+    transform: scale(1, 1);
+  }
+  
+  .input.input--radio::after {
+    content: '';
+    position: absolute;
+    top: -0.25rem;
+    left: -0.125rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-gray);
+    border-radius: 50%;
+  }
+  
+  .input.input--radio:checked::after {
+    background: var(--color-main-light);
+  }
+  
+  .form__field--action > *:not(:last-child) {
+    margin-right: 1rem;
+  }
+  
+/*=======================
+ Card Section
+========================*/
+
+.card {
+    border-radius: 1rem;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-light);
+    width: auto;
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .card__link {
+    transition: all 0.3s ease-in;
+  }
+  
+  .card__link:hover {
+    text-decoration: none;
+  }
+  
+  .card__body,
+  .card__header {
+    padding: 2rem 2.5rem;
+  }
+  
+  .card__header {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1.5px solid var(--color-light);
+  }
+  
+  .card__headerTitle {
+    font-size: 2.2rem;
+    font-weight: var(--font-medium);
+  }
+  
+  .card__header .card__link:hover {
+    text-decoration: underline;
+    color: var(--color-main);
+  }
+  
+  .card.card--dark {
+    background-color: var(--color-light);
+  }
+  
+  .card.card--dark .card__header {
+    box-shadow: var(--generic-shadow);
+  }
+  
+
+/*=======================
+ Utilities Section
+========================*/
+  
+.container {
+  width: 92%;
+  max-width: 165rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.container--narrow {
+  width: 92%;
+  max-width: 120rem;
+}
+
+@media screen and (min-width: 1000px) {
+  .container {
+    width: 90%;
+  }
+
+  .container--narrow {
+    width: 85%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 80%;
+  }
+
+  .container--narrow {
+    width: 72%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 72%;
+  }
+
+  .container--narrow {
+    width: 65%;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.m-sm {
+  margin: 1rem;
+}
+
+.m-md {
+  margin: 3rem;
+}
+
+.m-lg {
+  margin: 5rem;
+}
+
+.m-xl {
+  margin: 8rem;
+}
+
+.my-sm {
+  margin: 1rem auto;
+}
+
+.my-md {
+  margin: 3rem auto;
+}
+
+.my-lg {
+  margin: 5rem auto;
+}
+
+.my-xl {
+  margin: 8rem auto;
+}
+
+/*=======================
+ Variables Section
+========================*/
+
+:root {
+  --color-main: #5aa5b9;
+  --color-main-light: #e6faff;
+  --color-sub: #3f4156;
+  --color-sub-light: #51546e;
+  --color-sub-lighter: #ededfd;
+  --color-text: #737373;
+  --color-gray: #8b8b8b;
+  --color-light: #e5e7eb;
+  --color-light-gray: #767676;
+  --color-bg: #f8fafd;
+  --color-white: #fffefd;
+  --color-white-light: #f3f3f3;
+  --color-success: #359e64;
+  --color-success-bg: #def8e8;
+  --color-error: #fc4b0b;
+  --color-error-bg: #fff2ee;
+  --font-base: 'Poppins', arial, helvetica, 'Segoe UI', roboto, ubuntu, sans-serif;
+  --font-monospace: 'Fira Code', 'Courier New', courier, monospace;
+  --font-regular: 300;
+  --font-medium: 500;
+  --font-bold: 700;
+  --generic-shadow: 1px 1px 5px #00000010;
+  --generic-transition: all 0.3s ease-in-out;
+}
+
+/*=======================
+ Typography Section
+========================*/
+
+* {
+  font-family: var(--font-base);
+}
+
+h1 {
+  font-size: 4.8rem;
+  font-weight: var(--font-medium);
+}
+
+h2 {
+  font-size: 3.6rem;
+  font-weight: var(--font-bold);
+}
+
+h3 {
+  font-size: 3.2rem;
+  font-weight: var(--font-medium);
+}
+
+h4 {
+  font-size: 2.8rem;
+  font-weight: var(--font-medium);
+}
+
+h5 {
+  font-size: 2.4rem;
+  font-weight: var(--font-medium);
+}
+
+h5,
+h6 {
+  font-weight: var(--font-regular);
+}
+
+h6 {
+  font-size: 1.8rem;
+}
+
+p,
+span,
+strong {
+  font-size: 1.6rem;
+  color: var(--color-text);
+  font-weight: var(--font-regular);
+}
+
+strong {
+  font-weight: var(--font-medium);
+}
+
+pre,
+pre > *,
+pre > code * {
+  font-family: var(--font-monospace) !important;
+}
+
+a {
+  padding-bottom: 2px;
+  text-decoration: none;
+  display: inline-block;
+  color: var(--color-main);
+  font-weight: var(--font-medium);
+}
+
+/*=======================
+ Fonts Section
+========================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/*=======================
+ Messesages Section
+========================*/
+
+.alert {
+  display: inline-flex;
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2.5rem;
+  border-radius: 3px;
+  border: 1px solid var(--color-white-light);
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.alert,
+.alert > .alert__message {
+  background-color: var(--color-main-light);
+  color: var(--color-main);
+  font-size: 1.4rem;
+  font-weight: var(--font-medium);
+}
+
+.alert.alert--error,
+.alert.alert--error > .alert__message {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.alert.alert--success,
+.alert.alert--success > .alert__message {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.alert > .alert__close {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  outline: transparent;
+  font-size: 2rem;
+  transition: var(--generic-transition);
+}
+
+.alert > .alert__close:hover {
+  opacity: 0.85;
+}
+

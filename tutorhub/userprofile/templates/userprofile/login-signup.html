@@ -1,21 +1,46 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content   %}
 
-
 {% if page == 'register' %}
 
-<h1>Sign Up Now</h1>
+<div class="auth__register">
+    <div class="card">
+      <div class="auth__header text-center">
+        <a href="/">
+          <img src="{% static 'images/main-logo/puzzle1.png' %}" style="max-width: 80px;" alt="icon" />
+        </a>
+        <h3>Sign Up Now</h3>
+        <p>Create a New Tutor Hub Account</p>
+      </div>
 
-<form action="{% url 'register' %}" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Sign up"/>
-</form>
+      
+      <form action="{% url 'register' %}" method="POST" class="form auth__form">
+        {% csrf_token %}
+        
+        {% for field in form%}
+        <div class="form__field">
+          <label for="formInput#text">{{field.label}}</label>
+          {{field}}
+        </div>   
+        {% endfor %} 
 
-<p>Already have an Account? <a href="{% url 'login' %}">Sign In</a></p>
+        <div class="auth__actions">
+          <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
+        </div>
+      </form>
+      <div class="auth__alternative">
+        <p>Already have an Account?</p>
+        <!-- <a href="{% url 'login' %}">Log In</a> -->
+        <button type="button" class="btn btn-outline-success"><a href="{% url 'login' %}">Log In</a></button>
+      </div>
+    </div>
+  </div>
+
 {% else %}
-<form action="{%  url 'login' %}" method="POST">
+
+<!-- <form action="{%  url 'login' %}" method="POST">
     {% csrf_token %}
     <input id="username" type="text" name="username" placeholder="Enter Email"/>
     <input id="password" type="password" name="password" placeholder="Enter Password"/>
@@ -23,7 +48,56 @@
 
     <p>Don't have an Account? <a href="{% url 'register' %}">Sign Up Now</a></p>
 
-</form>
+</form> -->
+
+<div class="auth__login">
+    <div class="card">
+    <div class="auth__header text-center">
+        <a href="/">
+        <img src="{% static 'images/main-logo/puzzle1.png' %}" style="max-width: 80px;" alt="icon" />
+        </a>
+        <h3>Account Login</h3>
+        <p>Tutor Hub, Welcome Back!</p>
+    </div>
+
+    <form action="{%  url 'login' %}" method="POST" class="form auth__form">
+        {% csrf_token %}
+        <!-- Input:Email -->
+        <div class="form__field">
+        <label for="formInput#text">Email Address: </label>
+        <input
+            class="input input--text"
+            id="formInput#text"
+            type="text"
+            name="username"
+            placeholder="Enter Your Email Address"
+        />
+        </div>
+
+        <!-- Input:Password -->
+        <div class="form__field">
+        <label for="formInput#password">Password: </label>
+        <input
+            class="input input--password"
+            id="formInput#passowrd"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+        />
+        </div>
+        <div class="auth__actions">
+        <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+        <a href="forgetpassword.html">Forget Password?</a>
+        </div>
+    </form>
+    <div class="auth__alternative">
+        <p>Don’t have an Account?</p>
+        <!-- <a href="{% url 'register' %}" class="">Sign Up</a> -->
+        <button type="button" class="btn btn-outline-success"><a href="{% url 'register' %}">Sign Up</a></button>
+    </div>
+    </div>
+</div>
+
 {% endif %}
 
 
