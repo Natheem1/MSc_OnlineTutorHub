@@ -41,7 +41,7 @@ def loginUser(request):
 #LOGOUT PAGE 
 def logoutUser(request):
     logout(request)
-    messages.success(request, 'You have been Logged out')
+    messages.info(request, 'You have been Logged out')
     return redirect('login')
 
 #USER REGISTRATION PAGE
