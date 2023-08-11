@@ -145,12 +145,8 @@ Header/Navigation Section
 Footer Section
 ========================*/
 
-/* .footer {
-  background: linear-gradient(127deg, rgba(218, 229, 253, 0.54) 51.56%, rgba(255, 255, 255, 0.54) 100%);
-  padding: -400px 0;
-} */
 
-.footer {
+/* .footer {
   background-color: #333;
   color: #fff;
   padding: -220px 0; /
@@ -213,7 +209,7 @@ Footer Section
   background: linear-gradient(127deg, rgba(122, 158, 236, 0.54) 51.56%, rgba(255, 255, 255, 0.54) 100%);
   color: #fff;
   margin-top: 225px;
-}
+} */
 
 
 
@@ -325,4 +321,179 @@ Login/SignUp Page Styles
 .auth .auth__alternative a {
   font-size: 2rem;
   font-weight: 500;
+}
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  font-size: 14px;
+  background: #37517e;
+}
+
+#footer .footer-top {
+  padding: 60px 0 30px 0;
+  background: #fff;
+}
+
+#footer .footer-top .footer-contact {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-contact h3 {
+  font-size: 28px;
+  margin: 0 0 10px 0;
+  padding: 2px 0 2px 0;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #37517e;
+}
+
+#footer .footer-top .footer-contact p {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+  font-family: "Jost", sans-serif;
+  color: #5e5e5e;
+}
+
+#footer .footer-top h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #37517e;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+#footer .footer-top .footer-links {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#footer .footer-top .footer-links ul i {
+  padding-right: 2px;
+  color: #47b2e4;
+  font-size: 18px;
+  line-height: 1;
+}
+
+#footer .footer-top .footer-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+#footer .footer-top .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+#footer .footer-top .footer-links ul a {
+  color: #777777;
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+
+#footer .footer-top .footer-links ul a:hover {
+  text-decoration: none;
+  color: #47b2e4;
+}
+
+#footer .footer-top .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  background: #47b2e4;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+
+#footer .footer-top .social-links a:hover {
+  background: #209dd8;
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer .footer-bottom {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #fff;
+}
+
+#footer .copyright {
+  float: left;
+}
+
+#footer .credits {
+  float: right;
+  font-size: 13px;
+}
+
+#footer .credits a {
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  #footer .footer-bottom {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #footer .copyright,
+  #footer .credits {
+    text-align: center;
+    float: none;
+  }
+
+  #footer .credits {
+    padding-top: 4px;
+  }
+}
+
+#footer .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  justify-content: space-between;
+}
+
+#footer .footer-about {
+  width: 360px;
+  height: 185px;  
+}
+
+#footer .footer-about h5 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #37517e;
+}
+
+#footer .footer-about p {
+  font-family: "Jost", sans-serif;
+}
+
+/* Styles applied when the screen width is 1729px or smaller. */
+@media (max-width: 1729px) {
+   .footer-top h4 {
+      padding-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #37517e;
+      position: relative;
+      padding-bottom: 12px;
+  }
 }

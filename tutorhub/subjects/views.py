@@ -1,33 +1,52 @@
-from django.shortcuts import render
-# from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import Subject
+from .forms import SubjectForm
 
 
-subjectsList = [
-    {
-        'id': '1',
-        'title': 'Mathematics',
-        'description': 'Study of numbers, quantities, and shapes'
-    },
-    {
-        'id': '2',
-        'title': 'English Literature',
-        'description': 'Exploration of written works in the English language'
-    },
-    {
-        'id': '3',
-        'title': 'Biology',
-        'description': 'Study of living organisms and their interactions'
-    }
-]
 
 def subjects(request):
-    msg = 'Hello, your are on the Subjects page '
-    return render(request, 'subjects/subjects.html', {'message':msg, 'subjects':subjectsList})
+    subjects = Subject.objects.all()
+    context = {'subjects': subjects}
+    return render(request, 'subjects/subjects.html', {'subjects':subjects})
 
 
 def subject(request, pk):
-    subjectId = None
-    for i in subjectsList:
-        if i['id'] == pk:
-            subjectId = i 
-    return render(request, 'subjects/single-subject.html', {'subject': subjectId})
+    subjectObj = Subject.objects.get(id=pk)
+    tags = subjectObj.tags.all()
+    return render(request, 'subjects/single-subject.html', {'subject': subjectObj, 'tags': tags})
+
+def addSubject(request):
+    # tutorSubject = request.user.tutorprofile
+    form = SubjectForm()
+
+    if request.method == 'POST':
+        form = SubjectForm(request.POST, request.FILES)
+        if form .is_valid():
+            form.save()
+            return redirect('subjects')
+        
+    context = {'form': form}
+    return render(request, 'subjects/subject-form.html', context)
+
+
+def editSubject(request, pk):
+    subject = Subject.objects.get(id=pk)
+    form = SubjectForm(instance=subject)
+
+    if request.method == 'POST':
+        form = SubjectForm(request.POST, request.FILES, instance=subject)
+        if form .is_valid():
+            form.save()
+            return redirect('subjects')
+        
+    context = {'form': form}
+    return render(request, 'subjects/subject-form.html', context)
+
+def deleteSubject(request, pk):
+    subject = Subject.objects.get(id=pk)
+    if request.method == 'POST':
+        subject.delete()
+        return redirect('subjects')
+    context = {'object': subject}
+    return render(request, 'subjects/delete-template.html', context)

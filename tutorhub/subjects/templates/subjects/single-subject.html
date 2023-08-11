@@ -1,7 +1,15 @@
 {% extends 'main.html' %}
 
 {% block content %}
+
+<img src="{{ subject.subject_image.url }}">
 <h1> {{subject.title}} </h1>
 <br>
 <p>{{subject.description}}</p>
+
+<br>
+{% for tag in tags %}
+<h6 style="border: 1px solid grey;">{{tag}}</h6>
+{% endfor %}
+<br>
 {% endblock content %}

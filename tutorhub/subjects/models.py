@@ -6,6 +6,7 @@ class Subject(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    subject_image = models.ImageField(null=True, blank=True, upload_to='subject-image/' ,default="default-image/default-img.png")
     tags = models.ManyToManyField('Tag', blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)
     vote_ratio = models.IntegerField(default=0, null=True, blank=True)

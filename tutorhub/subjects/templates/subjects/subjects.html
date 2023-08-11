@@ -1,16 +1,38 @@
 {% extends 'main.html' %}
+
+
+
+
 {% block content  %}
 
-
-
 <h1> Subjects Template </h1>
-
-
+<a href="{% url 'add-subject' %}"> Add Subjects</a>
+<!-- 
 <ul>
     {% for subject in subjects %}
-        <li>Subject Name: <a href="{% url 'subject' subject.id %}">{{subject.title}}</a> - - - {{subject.description}}</li>
+        <li>Subject Name: <a href="{% url 'subject' subject.id %}">{{subject.title}}</a> - - - {{subject.description| slice:"40"}} - - - {{subject.created}}</li>
     {% endfor %}
-</ul>
+</ul> -->
+
+<table>
+    <tr>
+        <th>Subject</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for subject in subjects %}
+    <tr>
+        <td>{{subject.title}} - - </td>
+        <td>{{subject.description|slice:"35"}} - - </td>
+        <td>{{subject.created}}</td>
+        <td><a href="{% url 'edit-subject' subject.id %}">Edit</a></td>
+        <td><a href="{% url 'delete-subject' subject.id %}">Delete</a></td>
+        <td><a href="{% url 'subject' subject.id %}">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
 
 
 {% endblock content %}
