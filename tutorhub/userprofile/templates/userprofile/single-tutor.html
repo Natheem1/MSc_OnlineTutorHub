@@ -2,14 +2,82 @@
 
 {% block content %}
 
-<h1>Single Tutor Profile Page</h1>
-<img src="{{tutorObj.profile_image.url}}"/>
-<h3>Name: {{tutorObj.first_name}} {{tutorObj.last_name}}</h3>
-<h3>Email: {{tutorObj.email}}</h3>
-<h3>Location: {{tutorObj.location}}</h3>
-<h3>Hourly Rate: {{tutorObj.hourly_rate}}</h3>
+<!-- Main Section -->
+<main class="profile my-md">
+    <div class="container">
+      <div class="layout">
+
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <img class="avatar avatar--xl" src="{{tutorObj.profile_image.url}}" />
+              <h2 class="dev__name">{{tutorObj.username}}</h2>
+              <p class="dev__title">{{tutorObj.short_intro}}</p>
+              <p class="dev__location">{{tutorObj.location}}</p>
+              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">{{tutorObj.bio}}</p>
+          </div>
+          <div class="devInfo">
+            <h3 class="devInfo__title">Main Subjects</h3>
+            <div class="devInfo__skills">
+              {% for mainsubjskill in mainSubjects %}
+              <div class="devSkill">
+                <h4 class="devSkill__title">{{mainsubjskill.subject_name}}</h4>
+                <p class="devSkill__info">{{mainsubjskill.subject_description}}</p>
+              </div>
+              {% endfor %}
+              <h3 class="devInfo__subtitle">Other Subjects</h3>
+              {% for mainsubjskill in otherSubjects %}
+              <div class="devInfo__otherSkills">
+                <span class="tag tag--pill tag--sub tag--lg">
+                  <small>{{mainsubjskill}}</small>
+                </span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
 
 
-
+          <div class="devInfo">
+            <h3 class="devInfo__title">Subjects</h3>
+            <div class="grid grid--two">
+             {% for subject in tutorObj.subject_set.all %}
+              <div class="column">
+                <div class="card project">
+                  <a href="{% url 'subject' subject.id %}" class="project">
+                    <img class="project__thumbnail" src="{{subject.subject_image.url}}" alt="project thumbnail" />
+                    <div class="card__body">
+                      <h3 class="project__title">{{subject.title}}</h3>
+                      <p><a class="project__author" href="profile.html">By {{subject.owner.name}}</a>
+                    </p>
+                      <p class="project--rating">
+                        <span style="font-weight: bold;">{{subject.vote_ratio}}</span> Postitive
+                        Feedback ({{subject.vote_total}}) Vote{{subject.vote_total|pluralize:"s"}}
+                      </p>
+                      <div class="project__tags">
+                        {% for tag in subject.tags.all%}
+                        <span class="tag tag--pill tag--main">
+                          <small>{{tag}}</small>
+                        </span>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
 {% endblock content %}

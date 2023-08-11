@@ -12,5 +12,6 @@ urlpatterns = [
     path('student-profiles', views.studentProfiles, name="student-profiles"),
 
     path('tutor/<str:pk>', views.tutorProfile, name="tutor"),
+
     path('student/<str:pk>', views.studentProfile, name="student"),
 ]

@@ -72,17 +72,30 @@ def registerUser(request):
     return render(request, 'userprofile/login-signup.html', context)
 
 
-#ALL TUTOR PROFILES
+#ALL TUTOR PROFILES - DONE
 def tutorProfiles(request):
     tutors = TutorProfile.objects.all()
     context = {'tutors': tutors}
     return render(request, 'userprofile/tutor-profiles.html', context)
 
-#SINGLE TUTOR PROFILE
+
+
+#SINGLE TUTOR PROFILE - IN PROGRESS
 def tutorProfile(request,pk):
     tutorObj = TutorProfile.objects.get(id=pk)
-    context = {'tutorObj': tutorObj}
+
+    mainSubjects = tutorObj.mainsubjskill_set.exclude(subject_description__exact="")
+    otherSubjects = tutorObj.mainsubjskill_set.filter(subject_description="")
+
+
+
+
+    context = {'tutorObj': tutorObj, 'mainSubjects': mainSubjects, 
+               'otherSubjects': otherSubjects}
     return render(request, 'userprofile/single-tutor.html', context)
+
+
+
 
 #ALL STUDENT PROFILES 
 def studentProfiles(request):

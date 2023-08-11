@@ -5,34 +5,68 @@
 
 {% block content  %}
 
-<h1> Subjects Template </h1>
-<a href="{% url 'add-subject' %}"> Add Subjects</a>
-<!-- 
-<ul>
-    {% for subject in subjects %}
-        <li>Subject Name: <a href="{% url 'subject' subject.id %}">{{subject.title}}</a> - - - {{subject.description| slice:"40"}} - - - {{subject.created}}</li>
-    {% endfor %}
-</ul> -->
+<!-- Main Section -->
+<main class="projects">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>Search for <span>Subjects</span></h2>
+        </div>
 
-<table>
-    <tr>
-        <th>Subject</th>
-        <th>Description</th>
-        <th>Created</th>
-        <th></th>
-        <th></th>
-    </tr>
-    {% for subject in subjects %}
-    <tr>
-        <td>{{subject.title}} - - </td>
-        <td>{{subject.description|slice:"35"}} - - </td>
-        <td>{{subject.created}}</td>
-        <td><a href="{% url 'edit-subject' subject.id %}">Edit</a></td>
-        <td><a href="{% url 'delete-subject' subject.id %}">Delete</a></td>
-        <td><a href="{% url 'subject' subject.id %}">View</a></td>
-    </tr>
-    {% endfor %}
-</table>
+        <div class="hero-section__search">
+          <form class="form" action="#" method="get">
+            <div class="form__field">
+              <label for="formInput#search">Search By Subjects </label>
+              <input class="input input--text" id="formInput#search" type="text" name="text"
+                placeholder="Search by Subject " />
+            </div>
+
+            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="projectsList">
+      <div class="container">
+        <div class="grid grid--three">
+          {% for subject in subjects %}
+          <div class="column">
+            <div class="card project">
+              <a href="{% url 'subject' subject.id %}" class="project">
+                <img class="project__thumbnail" src="{{subject.subject_image.url}}" alt="project thumbnail" />
+                <div class="card__body">
+                  <h3 class="project__title">{{subject.title}}</h3>
+                  <p><a class="project__author" href="{% url 'subject' subject.id %}">By {{subject.owner}}</a></p>
+                  <p class="project--rating">
+                    <span style="font-weight: bold;">{{subject.vote_ratio}}</span> Postitive
+                    Feedback ({{subject.vote_total}}) Vote{{subject.vote_total|pluralize:"s"}}
+                  </p>
+
+                    
+                  <div class="project__tags">
+                    {% for tag in subjects.tags.all %}
+                    <span class="tag tag--pill tag--main">
+                      <small>{{tag}}</small>
+                    </span>
+                    {% endfor %}
+                  </div>
+
+
+    
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+          
+
+        </div>
+      </div>
+    </section>
+
+  </main>
 
 
 {% endblock content %}

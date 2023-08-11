@@ -1,8 +1,10 @@
 from django.db import models
 import uuid
+from userprofile.models import TutorProfile
 
 # SUBJECTS TABLE
 class Subject(models.Model):
+    owner = models.ForeignKey(TutorProfile, null=True, blank=True, on_delete=models.SET_NULL)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
@@ -24,6 +26,8 @@ class Subject(models.Model):
 
 # REVIEW TABLE 
 class Review(models.Model):
+    
+    # owner = 
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)

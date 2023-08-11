@@ -24,7 +24,7 @@ class StudentProfile(models.Model):
         ('Year 13', 'Year 13 KS5'),
     )
     education = models.CharField(max_length=200, choices=EDUCATION_LEVEL)
-    interested_subjects = models.ManyToManyField('Subject',blank=True)
+    interested_subjects = models.ManyToManyField('MainSubjSkill',blank=True)
 
     profile_image = models.ImageField(null=True, blank=True, upload_to='student-profile-img/', 
                                       default="defaultprofileimg/default.png")
@@ -67,7 +67,7 @@ class TutorProfile(models.Model):
     bio = models.TextField(blank=True, null=True)
     teaching_level = models.ManyToManyField('TeachingLevel', blank=False) 
     hourly_rate = models.CharField(max_length=20, blank=True, null=True)
-    teaching_subjects = models.ManyToManyField('Subject',blank=True)
+    teaching_subjects = models.ManyToManyField('MainSubjSkill',blank=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to='tutor-profile-img/', 
                                       default="defaultprofileimg/default.png")
     
@@ -82,8 +82,10 @@ class TutorProfile(models.Model):
 
 
 # SUBJECT TABLE - its for the Tutor Table/Model
-class Subject(models.Model):
-    subject_name = models.CharField(max_length=60, unique=True)
+class MainSubjSkill(models.Model):
+    owner = models.ForeignKey(TutorProfile, on_delete=models.CASCADE, null=True, blank=True)
+    subject_name = models.CharField(max_length=200, unique=True)
+    subject_description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, 
                           primary_key=True, editable=False)
