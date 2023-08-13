@@ -6,10 +6,10 @@ from django.conf import settings
 class StudentProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
                                        null=True, blank=True)
-    email = models.EmailField(max_length=500, blank=True, null=True)
-    username = models.CharField(max_length=200, blank=True, null=True)
-    name = models.CharField(max_length=200, blank=True, null=True)
-    first_name = models.CharField(max_length=300, blank=True, null=True)
+    email = models.EmailField(max_length=500, blank=False, null=True)
+    username = models.CharField(max_length=200, blank=False, null=True)
+    name = models.CharField(max_length=200, blank=False, null=True)
+    first_name = models.CharField(max_length=300, blank=False, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     short_goal = models.CharField(max_length=200, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
@@ -23,7 +23,7 @@ class StudentProfile(models.Model):
         ('Year 12', 'Year 12 KS5'),
         ('Year 13', 'Year 13 KS5'),
     )
-    education = models.CharField(max_length=200, choices=EDUCATION_LEVEL)
+    Year_group = models.CharField(max_length=200, choices=EDUCATION_LEVEL)
     interested_subjects = models.ManyToManyField('MainSubjSkill',blank=True)
 
     profile_image = models.ImageField(null=True, blank=True, upload_to='student-profile-img/', 
@@ -57,10 +57,10 @@ class StudentProfile(models.Model):
 class TutorProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
                                      null=True, blank=True)
-    email = models.EmailField(max_length=500, blank=True, null=True)
-    username = models.CharField(max_length=100, blank=True, null=True)
-    name = models.CharField(max_length=200, blank=True, null=True)
-    first_name = models.CharField(max_length=300, blank=True, null=True)
+    email = models.EmailField(max_length=500, blank=False, null=True)
+    username = models.CharField(max_length=100, blank=False, null=True)
+    name = models.CharField(max_length=200, blank=False, null=True)
+    first_name = models.CharField(max_length=300, blank=False, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     location = models.CharField(max_length=500, blank=True, null=True)
     short_intro = models.CharField(max_length=200, blank=True, null=True)

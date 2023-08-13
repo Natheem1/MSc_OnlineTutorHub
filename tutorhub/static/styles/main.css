@@ -1,3 +1,11 @@
+.content-box {
+  width: 95%;
+  max-width: 85rem;
+  margin: 0 auto;
+}
+
+
+
 /*=======================
 Header/Navigation Section
 ========================*/
@@ -254,11 +262,14 @@ Login/SignUp Page Styles
 
 
 /*--------------------------------------------------------------
-# Footer
+# Footer style 
 --------------------------------------------------------------*/
 #footer {
   font-size: 14px;
-  background: #37517e;
+  background: #51546e;
+}
+#footer .credits a {
+  color: #fff;
 }
 
 #footer .footer-top {
@@ -432,14 +443,14 @@ Login/SignUp Page Styles
 ========================*/
 
 .hero-section {
-  height: 40vh;
+  height: 50vh;
   display: flex;
   align-items: center;
-  background-color: var(--color-sub);
+  background-color: var(--color-sub-light);
 }
 
 .hero-section__box {
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
 }
 
 .hero-section__box > h2,
@@ -500,6 +511,7 @@ Login/SignUp Page Styles
   left: -9999px;
 }
 
+
 .hero-section__search > .form input.input--text {
   width: 50rem;
 }
@@ -519,3 +531,250 @@ Login/SignUp Page Styles
   }
 }
 
+/*=======================
+All Tutors Profile Card Layout Section
+========================*/
+
+.devlist .dev img{
+  height: 130px;
+  width: 130px;
+}
+
+.devlist {
+  margin-top: 8rem;
+}
+
+.devlist .grid {
+  align-items: stretch;
+}
+
+.devlist .dev .dev__profile {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.devlist .dev .dev__meta h3 {
+  color: var(--color-sub);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.devlist .dev .dev__meta h5 {
+  color: var(--color-text);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.devlist .dev .dev__info {
+  margin: 1.5rem 0;
+  font-size: 1.35rem;
+  line-height: 1.4;
+  text-align: justify;
+}
+
+
+/*=======================
+Subject Ad Card Layout Section
+========================*/
+
+.projects .column {
+  padding-top: 1.5rem;
+}
+
+.projects .column img{
+  padding-top: 2rem;
+  padding-left: 2rem;
+  height: 220px;
+  width: 290px;
+}
+
+/*=======================
+Sinlge Tutors Profile Card Layout Section
+========================*/
+
+/* Profile image styling  */
+.profile.my-md img{
+  height: 215px;
+  width: 230px;
+}
+
+/* Subject Card Image styling on single tutor page */
+.profile.my-md .column .project__thumbnail{
+  padding-top: 2rem;
+  padding-left: 2rem;
+  height: 220px;
+  width: 300px;
+  
+}
+
+/*=======================
+Sinlge Tutors account subject ad Layout Section
+========================*/
+
+.settingsPage.profile.my-md .settings__table img {
+  padding-top: 0.5rem;
+  padding-right: 2rem;
+  height: 100px;
+  width: 130px;
+}
+
+/*=======================
+Tag Section
+========================*/
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-sub);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.tag:not(:last-child) {
+  margin-right: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.tag > small {
+  color: var(--color-white);
+}
+
+.tag--outline > small {
+  color: var(--color-sub);
+}
+
+.tag--outline {
+  border: 2px solid var(--color-sub);
+  background-color: transparent;
+  padding: 0.4rem 1rem;
+}
+
+.tag--pill {
+  border-radius: 5rem;
+}
+
+.tag--main,
+.tag--main > small {
+  background: var(--color-main-light);
+  color: var(--color-main);
+  font-weight: 500;
+}
+
+.tag--sub,
+.tag--sub > small {
+  background: var(--color-sub-lighter);
+  color: var(--color-sub-light);
+  font-weight: 500;
+}
+
+.tag--lg {
+  padding: 0.8rem 3rem;
+  font-size: 1.4rem;
+}
+
+.tag--lg:not(:last-child) {
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+/*=======================
+Form Page Section
+========================*/
+
+.formPage .formWrapper {
+  list-style: none;
+  background: var(--color-white);
+  padding: 3.5rem 5rem;
+  border: 2px solid var(--color-light);
+  border-radius: 0.7rem;
+}
+
+.formPage .formWrapper__subject {
+  font-size: 2.8rem;
+  color: var(--color-sub);
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+/*=======================
+  Account Settings
+========================*/
+
+.settingsPage .dev > .settings__btn {
+  display: inline-block;
+  margin-bottom: 3rem;
+}
+
+.settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings__title {
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-sub);
+}
+
+.settings__table {
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  padding: 0 3rem;
+  background: var(--color-white);
+}
+
+.settings__table tr {
+  width: 100%;
+}
+
+.settings__table tr > td {
+  padding: 2rem 0;
+}
+
+.settings__table tr:not(:last-child) td {
+  border-bottom: 2px solid var(--color-white-light);
+}
+
+.settings__thumbnail {
+  width: 23%;
+  min-width: 10rem;
+}
+
+.settings__thumbnail img {
+  padding-right: 3rem;
+  height: 15rem;
+  object-fit: contain;
+}
+
+.settings__tableInfo{
+  width: 100%;
+}
+
+.settings__tableInfo h4,
+.settings__tableInfo a {
+  padding-right: 1rem;
+  width: auto;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--color-sub);
+}
+
+.settings__tableInfo p {
+  font-size: 1.4rem;
+}
+
+.settings__tableActions {
+  text-align: right;
+}

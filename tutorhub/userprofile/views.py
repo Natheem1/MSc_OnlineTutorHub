@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from users.forms import MyUserCreationForm
+from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm
 from django.db import IntegrityError
 # from django.contrib.auth.forms import UserCreationForm
 from users.models import NewUser
-from . models import TutorProfile, StudentProfile
+from . models import TutorProfile, StudentProfile, MainSubjSkill
 
 #LOGIN PAGE
 def loginUser(request):
@@ -62,7 +63,12 @@ def registerUser(request):
                 messages.success(request, 'User Was Successful Created')
 
                 login(request, user)
-                return redirect('subjects')
+
+                if user.user_type == 'tutor':
+                    return redirect('edit-taccount')  # Redirect to tutor profile edit page
+                elif user.user_type == 'student':
+                    return redirect('edit-saccount')  # Redirect to student profile edit page
+        
             except IntegrityError:
                 messages.error(request, 'An account with this email already exists')
         else:
@@ -87,13 +93,88 @@ def tutorProfile(request,pk):
     mainSubjects = tutorObj.mainsubjskill_set.exclude(subject_description__exact="")
     otherSubjects = tutorObj.mainsubjskill_set.filter(subject_description="")
 
-
-
-
     context = {'tutorObj': tutorObj, 'mainSubjects': mainSubjects, 
                'otherSubjects': otherSubjects}
     return render(request, 'userprofile/single-tutor.html', context)
 
+
+
+#TUTOR ACCOUNCT 'CRUD'
+@login_required(login_url='login')
+def tutorAccount(request):
+    account = request.user.tutorprofile
+
+    teachings = account.mainsubjskill_set.all()
+    subjects = account.subject_set.all()
+    
+    context = {'account': account, 'teachings': teachings, 'subjects': subjects}
+    return render(request, 'userprofile/tutor-account.html', context)
+
+
+#EDIT USER PROFILE ACCOUNT 
+@login_required(login_url='login')
+def editTAccount(request):
+    tutprofile = request.user.tutorprofile
+    tutorform = TutorProfileForm(instance=tutprofile)
+
+    if request.method == 'POST':
+        tutorform = TutorProfileForm(request.POST, request.FILES, instance=tutprofile)
+        if tutorform.is_valid():
+            tutorform.save()
+
+            return redirect('tutor-account')
+ 
+    context = {'tutorform': tutorform}
+    return render(request, 'userprofile/tutorprofile-form.html', context)
+
+#ADD TEACHING SUBJECTS 
+@login_required(login_url='login')
+def addTeachSubject(request):
+    tutorprofile = request.user.tutorprofile 
+    form = TeachSubjectForm()
+
+    if request.method == 'POST':
+        form = TeachSubjectForm(request.POST)
+        if form.is_valid():
+            addSubject = form.save(commit=False)
+            addSubject.owner = tutorprofile
+            addSubject.save()
+            messages.success(request, 'Subject added successfully')
+            return redirect('tutor-account')
+        
+    context = {'form': form}
+    return render(request, 'userprofile/teachingsubjects-form.html', context)
+
+# UPDATE TEACHING SUBJECTS 
+@login_required(login_url='login')
+def editTeachSubject(request, pk):
+    profile = request.user.tutorprofile 
+    subject = profile.mainsubjskill_set.get(id=pk)
+    form = TeachSubjectForm(instance=subject)
+
+    if request.method == 'POST':
+        form = TeachSubjectForm(request.POST, instance=subject)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Subject Edited successfully')
+            return redirect('tutor-account')
+        
+    context = {'form': form, 'profile':profile, 'subject':subject}
+    return render(request, 'userprofile/teachingsubjects-form.html', context)
+
+#DELETE TEACHING SUBJECTS
+@login_required(login_url='login')
+def deleteTeachSubject(request, pk):
+    profile = request.user.tutorprofile
+    subject = profile.mainsubjskill_set.get(id=pk)
+
+    if request.method == 'POST':
+        subject.delete()
+        messages.success(request, 'Subject was deleted successfully')
+        return redirect('tutor-account')
+
+    context ={'subject': subject}
+    return render(request, 'delete-template.html', context)
 
 
 
@@ -108,3 +189,65 @@ def studentProfile(request,pk):
     studentObj = StudentProfile.objects.get(id=pk)
     context = {'studentObj': studentObj}
     return render(request, 'userprofile/single-student.html', context)
+
+
+#STUDENT ACCOUNCT 'CRUD'
+@login_required(login_url='login')
+def studentAccount(request):
+    stuaccount = request.user.studentprofile
+
+    interested = stuaccount.interested_subjects.all()
+  
+    context = {'stuaccount': stuaccount, 'interested':interested}
+    return render(request, 'userprofile/student-account.html', context)
+
+
+
+#EDIT STUDENT PROFILE ACCOUNT 
+@login_required(login_url='login')
+def editSAccount(request): 
+    stuprofile = request.user.studentprofile
+    studentform = StudentProfileForm(instance=stuprofile)
+
+    if request.method == 'POST':
+        studentform = StudentProfileForm(request.POST, request.FILES, instance=stuprofile)
+        if studentform.is_valid():
+            studentform.save()
+
+            return redirect('student-account')
+
+    context = {'studentform': studentform}
+    return render(request, 'userprofile/studentprofile-form.html', context)
+
+#ADD INTERESTED IN SUBJECTS 
+# @login_required(login_url='login')
+# def addIntrestedSubject(request):
+#     studentprofile = request.user.studentprofile 
+#     form = InterestedSubjectForm()
+
+#     if request.method == 'POST':
+#         form = InterestedSubjectForm(request.POST)
+#         if form.is_valid():
+#             addSubject = form.save(commit=False)
+#             addSubject.owner = studentprofile
+#             addSubject.save()
+#             messages.success(request, 'Subject added successfully')
+#             return redirect('student-account')
+        
+#     context = {'form': form}
+#     return render(request, 'userprofile/interestedsubjects-form.html', context)
+
+@login_required(login_url='login')
+def addIntrestedSubject(request):
+    studentprofile = request.user.studentprofile
+    form = InterestedSubjectForm()
+
+    if request.method == 'POST':
+        form = InterestedSubjectForm(request.POST, instance=studentprofile)
+        if form.is_valid():
+            form.save()  # This saves the selected subjects to the studentprofile
+            messages.success(request, 'Subject added successfully')
+            return redirect('student-account')
+
+    context = {'form': form}
+    return render(request, 'userprofile/interestedsubjects-form.html', context)

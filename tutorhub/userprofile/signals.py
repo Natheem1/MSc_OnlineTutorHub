@@ -27,6 +27,35 @@ def createProfile(sender, instance, created, **kargs):
 
 post_save.connect(createProfile, sender=settings.AUTH_USER_MODEL)
 
+#EDIT TUTOR PROFILE SIGNAL
+def updateTutorUser(sender, instance, created, **kargs):
+    tutorprofile = instance 
+    user = tutorprofile.user
+
+    if created == False:
+        user.first_name = tutorprofile.name
+        user.username = tutorprofile.username 
+        user.email = tutorprofile.email
+        user.save()
+
+
+post_save.connect(updateTutorUser, sender=TutorProfile)
+
+
+#EDIT STUDENT PROFILE SIGNAL
+def updateStudentUser(sender, instance, created, **kargs):
+    studentprofile = instance 
+    user = studentprofile.user
+
+    if created == False:
+        user.first_name = studentprofile.name
+        user.username = studentprofile.username
+        user.email = studentprofile.email
+        user.save()
+
+
+post_save.connect(updateStudentUser, sender=StudentProfile)
+
 
 #DELETE PROFILE SIGNAL
 def deleteUser(sender, instance, **kargs):

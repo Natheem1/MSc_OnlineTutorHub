@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+            <h2>Edit {{user.username|capfirst}}'s Profile</h2>
+            <br>
+
+            <form class="form" method="POST" action="{% url 'edit-taccount'%}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in tutorform %}
+                <!-- Input:Text -->
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}</label>
+                    {{field}}
+                </div>
+                {% endfor %}
+
+                <!-- Render the formset fields -->
+                <!-- {% for form in formset %}
+                <div class="form__field">
+                    <label>{{ form.subject_name.label }}</label>
+                    {{ form.subject_name }}
+                    <label>{{ form.subject_description.label }}</label>
+                    {{ form.subject_description }}
+                </div>
+                {% endfor %}  -->
+
+                <!-- Add new subject button -->
+                <!-- <button type="button" id="add-subject">+ Add Subject</button> -->
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}

@@ -526,10 +526,6 @@ Alert Section
 }
 
 
-
-
-
-
 /*=======================
 Button Section
 ========================*/
@@ -657,4 +653,102 @@ button[disabled] {
   background-color: var(--color-light);
   color: var(--color-gray);
   cursor: unset;
+}
+
+/*=======================
+Layout Section
+========================*/
+.layout {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.layout > .column {
+  margin-bottom: 3rem;
+}
+
+.layout > .column.column--1of3 {
+  flex-basis: 30%;
+}
+
+.layout > .column.column--2of3 {
+  flex-basis: 64%;
+}
+
+.layout > .column.column--1of2 {
+  flex-basis: 48%;
+}
+
+@media screen and (max-width: 1080px) {
+  .layout > .column {
+    flex-basis: 100% !important;
+  }
+}
+
+
+/*=======================
+Grid Section
+========================*/
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.grid > .column {
+  min-width: 28rem;
+  margin-bottom: 2.5rem;
+}
+
+.grid--three > .column {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .grid--three {
+    margin-right: -2%;
+  }
+
+  .grid--three > .column {
+    margin-right: 2%;
+  }
+
+  .grid--three > .column {
+    flex-basis: 48%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .grid--three {
+    margin-right: -2.33%;
+  }
+
+  .grid--three > .column {
+    margin-right: 2.33%;
+  }
+
+  .grid--three > .column {
+    flex-basis: 31%;
+  }
+}
+
+.grid--two > .column {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .grid--two {
+    margin-right: -2%;
+  }
+
+  .grid--two > .column {
+    margin-right: 2%;
+  }
+
+  .grid--two > .column {
+    flex-basis: 48%;
+  }
 }

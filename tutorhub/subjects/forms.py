@@ -12,8 +12,8 @@ class SubjectForm(ModelForm):
     #     }
 
     
-    # def _init_(self, *args, **kwargs):
-    #     super(SubjectForm, self)._init_(*args, **kwargs)
+    def _init_(self, *args, **kwargs):
+        super(SubjectForm, self)._init_(*args, **kwargs)
 
-    #     for name, field in self.fields.items():
-    #         field.widget.attrs.update({'class': 'input'})
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})

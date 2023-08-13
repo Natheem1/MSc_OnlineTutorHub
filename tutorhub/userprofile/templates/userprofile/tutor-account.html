@@ -1,0 +1,77 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-taccount' %}"><i class="im im-edit"></i> Edit</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{account.profile_image.url}}" />
+              <h2 class="dev__name">{{account.name}}</h2>
+              <p class="dev__title">{{account.short_intro}}</p>
+              <p class="dev__location">Based in {{account.location}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">{{account.bio}}</p>
+          </div>
+
+          <div class="settings">
+            <h3 class="settings__title">Main Subjects</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{%  url 'add-teach-subject' %}"><i class="im im-plus"></i> Add Subject</a>
+          </div>
+
+          <table class="settings__table">
+            {% for teaching in teachings %}
+            <tr>
+              <td class="settings__tableInfo">
+                <h4>{{teaching.subject_name}}</h4>
+                <p>
+                  {{ teaching.subject_description }}
+                </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-teach-subject' teaching.id %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-teach-subject' teaching.id%}"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+
+          <div class="settings">
+            <h3 class="settings__title">Subject Ads</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'add-subject' %}"><i class="im im-plus"></i> Add Subject Ads</a>
+          </div>
+
+          <table class="settings__table">
+            {% for subject in subjects %}
+            <tr>
+              <td class="settings__thumbnail">
+                <a href="{% url 'subject' subject.id %}"><img src="{{subject.subject_image.url}}" alt="Project Thumbnail" /></a>
+              </td>
+              <td class="settings__tableInfo">
+                <a href="{% url 'subject' subject.id %}">{{subject.title}}</a>
+                <p>{{subject.description | slice:"150"}}...</p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-subject' subject.id %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-subject' subject.id %}"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock content  %}
