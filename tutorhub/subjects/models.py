@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from userprofile.models import TutorProfile
+from userprofile.models import TutorProfile, StudentProfile
 
 # SUBJECTS TABLE
 class Subject(models.Model):
@@ -22,12 +22,24 @@ class Subject(models.Model):
     class Meta:
         ordering = ['created']
 
+    #Vote Calculation
+    @property 
+    def getVoteCount(self):
+        reviews = self.review_set.all()
+        upVotes = reviews.filter(value='up').count()
+        totalVotes = reviews.count()
+
+        ratio = (upVotes / totalVotes) * 100
+        self.vote_total = totalVotes
+        self.vote_ratio = ratio
+        self.save()
+
 
 
 # REVIEW TABLE 
 class Review(models.Model):
     
-    # owner = 
+    owner = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)

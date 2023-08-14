@@ -3,13 +3,108 @@
 
 {% block content %}
 
-<h1>Single Student Profile</h1>
-<img src="{{studentObj.profile_image.url}}"/>
-<h3>Name: {{studentObj.first_name}} {{studentObj.last_name}}</h3>
-<h3>Email: {{studentObj.email}}</h3>
-<h3>Goal: {{studentObj.short_goal}}</h3>
-<h3>Year Group: {{studentObj.education}}</h3>
-<h3>Parent: {{studentObj.parent_name}}</h3>
-<h3>Preferred Session Time: {{studentObj.preferred_availability}}</h3>
+{% if user.is_authenicated %}
+
+  <!-- Main Section -->
+  <main class="profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <img class="avatar avatar--xl" src="{{studentObj.profile_image.url}}" />
+              <h2 class="dev__name">{{studentObj.username}}</h2>
+              <p class="dev__title">Goal: {{studentObj.short_goal}}</p>
+              <p class="dev__location">Level: {{studentObj.Year_group}}</p>
+              <p class="dev__location"> {{studentObj.preferred_availability}}</p>
+              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            </div>
+          </div>
+
+          <div class="card text-center1">
+            <div class="card__body dev">
+              <img class="avatar avatar--xl" src="{{studentObj.profile_image.url}}" />
+              <h5>Parent Contact Details</h5>
+              <h2 class="dev__name">{{studentObj.parent_name}}</h2>
+              <p class="dev__title">Email: {{studentObj.parent_email}}</p>
+              <p class="dev__location">Contact Number: {{studentObj.parent_phone}}</p>
+              <br>
+              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">{{studentObj.bio}}</p>
+          </div>
+
+          <div class="devInfo">
+            <h3 class="devInfo__title">Subjects I'm Interested in</h3>
+            <div class="devInfo__skills">
+              <div class="devSkill">
+                <h4 class="devSkill__title">JavaScript</h4>
+                <p class="devSkill__info">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae neque voluptatum ut? Quaerat, ea
+                  cumque! Dolorum provident esse molestias commodi odit sapiente quod quasi corrupti obcaecati? Nobis
+                  ex temporibus quaerat!
+                </p>
+              </div>
+              
+              
+
+              <h3 class="devInfo__subtitle">Other Skills</h3>
+              <div class="devInfo__otherSkills">
+                <span class="tag tag--pill tag--sub tag--lg">
+                  <small>Figma</small>
+                </span>
+               
+              </div>
+            </div>
+          </div>
+          <div class="devInfo">
+            <h3 class="devInfo__title">Projects</h3>
+            <div class="grid grid--two">
+
+              <div class="column">
+                <div class="card project">
+                  <a href="single-project.html" class="project">
+                    <img class="project__thumbnail" src="images/project-b.png" alt="project thumbnail" />
+                    <div class="card__body">
+                      <h3 class="project__title">DevSearch UI Design</h3>
+                      <p><a class="project__author" href="profile.html">By Shahriar P. Shuvo</a></p>
+                      <p class="project--rating">
+                        <span style="font-weight: bold;">92%</span> Postitive
+                        Feedback (62 Votes)
+                      </p>
+                      <div class="project__tags">
+                        <span class="tag tag--pill tag--main">
+                          <small>NextJS</small>
+                        </span>
+                        <span class="tag tag--pill tag--main">
+                          <small>GraphQL</small>
+                        </span>
+                        <span class="tag tag--pill tag--main">
+                          <small>TypeScript</small>
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% endif %}
 
 {% endblock content %}

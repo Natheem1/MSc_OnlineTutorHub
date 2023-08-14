@@ -5,6 +5,16 @@ from userprofile .models import StudentProfile, TutorProfile, MainSubjSkill
 from django import forms
 
 class MyUserCreationForm(UserCreationForm):
+    USER_TYPE_CHOICES = [
+        ('tutor', 'Tutor'),
+        ('student', 'Student'),
+    ]
+
+    user_type = forms.ChoiceField(
+        choices=USER_TYPE_CHOICES,
+        widget=forms.RadioSelect(attrs={'class': 'radio-buttons'}),
+    )
+
     class Meta:
         model = NewUser
         fields = ('first_name','email', 'username','user_type', 'password1', 'password2')

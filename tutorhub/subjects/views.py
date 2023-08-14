@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import Subject, Tag
-from .forms import SubjectForm
+from .forms import SubjectForm, ReviewForm
+from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from .utils import searchsubjects
@@ -13,7 +14,7 @@ def subjects(request):
     subjects, search_query = searchsubjects(request)
 
     page = request.GET.get('page') 
-    results = 3 
+    results = 6
     paginator = Paginator(subjects, results)
 
     try:
@@ -31,8 +32,26 @@ def subjects(request):
 
 def subject(request, pk):
     subjectObj = Subject.objects.get(id=pk)
+
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit=False)
+        review.subject = subjectObj
+        review.owner = request.user.studentprofile
+        review.save()
+
+        subjectObj.getVoteCount
+
+        messages.success(request, 'Review Successful Submitted')
+        return redirect('subject', pk=subjectObj.id)
+
     tags = subjectObj.tags.all()
-    return render(request, 'subjects/single-subject.html', {'subject': subjectObj, 'tags': tags})
+
+    user_type = request.user.user_type if request.user.is_authenticated and request.user.user_type == 'tutor' else None
+
+    return render(request, 'subjects/single-subject.html', {'subject': subjectObj, 'tags': tags, 'form': form, 'user_type': user_type})
 
 @login_required(login_url='login')
 def addSubject(request):

@@ -45,6 +45,10 @@ def logoutUser(request):
     messages.info(request, 'You have been Logged out')
     return redirect('login')
 
+#SIGN UP PAGE - STUDENT OR TUTOR
+def signupPage(request):
+    return render(request, 'userprofile/signup-page.html')
+
 #USER REGISTRATION PAGE
 def registerUser(request):
     page = 'register'

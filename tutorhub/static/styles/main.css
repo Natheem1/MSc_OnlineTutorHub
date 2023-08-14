@@ -799,7 +799,52 @@ Form Page Section
   single Subject Page 
 ========================*/
 
-.column.column--2of3 img {
+.column.column--2of3 .singleProject__preview img {
   height: 450px;
-  width: 600px;
+  width: 650px;
 }
+
+.column--2of3 .avatar .avatar--md img {
+  height: 80px;
+  width: 80px;
+}
+
+/*========== Comments ==========*/
+
+.comments {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--color-light);
+}
+
+.comments .form label {
+  position: absolute;
+  margin: -9999px;
+}
+
+.commentList {
+  margin: 3rem 0;
+}
+
+.comment {
+  display: flex;
+  gap: 2rem;
+}
+
+.comment:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+.comment__author {
+  font-size: 1.8rem;
+}
+
+.comment__info {
+  font-size: 1.45rem;
+}
+
+
+
+
+
+/*========== Toggle Button Creation ==========*/
