@@ -31,7 +31,7 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, 'LOGGED IN - WELCOME TO TUTOR HUB')
+            messages.success(request, 'Signed In - Welcome to Tutor Hub')
             return redirect('tutor-profiles')
         else:
             messages.error(request,'LOGIN FAILED - USERNAME OR PASSWORD IS INVALID')
@@ -42,7 +42,7 @@ def loginUser(request):
 #LOGOUT PAGE 
 def logoutUser(request):
     logout(request)
-    messages.info(request, 'You have been Logged out')
+    messages.info(request, 'Signed Out Successfully')
     return redirect('login')
 
 #SIGN UP PAGE - STUDENT OR TUTOR
@@ -64,7 +64,7 @@ def registerUser(request):
                 # user.username = user.username.lower()
                 user.save()
 
-                messages.success(request, 'User Was Successful Created')
+                messages.success(request, 'User Successfully Created')
 
                 login(request, user)
 
@@ -74,7 +74,7 @@ def registerUser(request):
                     return redirect('edit-saccount')  # Redirect to student profile edit page
         
             except IntegrityError:
-                messages.error(request, 'An account with this email already exists')
+                messages.error(request, 'An account email already exists')
         else:
             messages.error(request, 'An Error Has Occurred During Registration')
 
@@ -104,7 +104,7 @@ def tutorProfile(request,pk):
 
 
 
-#TUTOR ACCOUNCT 'CRUD'
+#TUTOR ACCOUNCT 'CRUD' - Tutor
 @login_required(login_url='login')
 def tutorAccount(request):
     account = request.user.tutorprofile
@@ -116,7 +116,7 @@ def tutorAccount(request):
     return render(request, 'userprofile/tutor-account.html', context)
 
 
-#EDIT USER PROFILE ACCOUNT 
+#EDIT USER PROFILE ACCOUNT - Tutor
 @login_required(login_url='login')
 def editTAccount(request):
     tutprofile = request.user.tutorprofile
@@ -132,7 +132,7 @@ def editTAccount(request):
     context = {'tutorform': tutorform}
     return render(request, 'userprofile/tutorprofile-form.html', context)
 
-#ADD TEACHING SUBJECTS 
+#ADD TEACHING SUBJECTS - Tutor
 @login_required(login_url='login')
 def addTeachSubject(request):
     tutorprofile = request.user.tutorprofile 
@@ -150,7 +150,7 @@ def addTeachSubject(request):
     context = {'form': form}
     return render(request, 'userprofile/teachingsubjects-form.html', context)
 
-# UPDATE TEACHING SUBJECTS 
+# UPDATE TEACHING SUBJECTS - Tutor
 @login_required(login_url='login')
 def editTeachSubject(request, pk):
     profile = request.user.tutorprofile 
@@ -167,7 +167,7 @@ def editTeachSubject(request, pk):
     context = {'form': form, 'profile':profile, 'subject':subject}
     return render(request, 'userprofile/teachingsubjects-form.html', context)
 
-#DELETE TEACHING SUBJECTS
+#DELETE TEACHING SUBJECTS - Tutor
 @login_required(login_url='login')
 def deleteTeachSubject(request, pk):
     profile = request.user.tutorprofile
@@ -180,6 +180,8 @@ def deleteTeachSubject(request, pk):
 
     context ={'subject': subject}
     return render(request, 'delete-template.html', context)
+
+
 
 
 
@@ -196,7 +198,7 @@ def studentProfile(request,pk):
     return render(request, 'userprofile/single-student.html', context)
 
 
-#STUDENT ACCOUNCT 'CRUD'
+#STUDENT ACCOUNCT 'CRUD' - Student
 @login_required(login_url='login')
 def studentAccount(request):
     stuaccount = request.user.studentprofile
@@ -208,7 +210,7 @@ def studentAccount(request):
 
 
 
-#EDIT STUDENT PROFILE ACCOUNT 
+#EDIT STUDENT PROFILE ACCOUNT  - Student
 @login_required(login_url='login')
 def editSAccount(request): 
     stuprofile = request.user.studentprofile
@@ -224,24 +226,9 @@ def editSAccount(request):
     context = {'studentform': studentform}
     return render(request, 'userprofile/studentprofile-form.html', context)
 
-#ADD INTERESTED IN SUBJECTS 
-# @login_required(login_url='login')
-# def addIntrestedSubject(request):
-#     studentprofile = request.user.studentprofile 
-#     form = InterestedSubjectForm()
 
-#     if request.method == 'POST':
-#         form = InterestedSubjectForm(request.POST)
-#         if form.is_valid():
-#             addSubject = form.save(commit=False)
-#             addSubject.owner = studentprofile
-#             addSubject.save()
-#             messages.success(request, 'Subject added successfully')
-#             return redirect('student-account')
-        
-#     context = {'form': form}
-#     return render(request, 'userprofile/interestedsubjects-form.html', context)
 
+#ADD INTERESTED SUBJECT - By Student 
 @login_required(login_url='login')
 def addIntrestedSubject(request):
     studentprofile = request.user.studentprofile

@@ -8,28 +8,23 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
-
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: #ffffff;
-      text-decoration: none;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px;
-    }
   </style>
+
   <div class="signupcontainer">
-    <!-- <div class="card"> -->
+    
     <img src="{% static 'images/main-logo/online-class.png'%}" style="max-width: 200px; margin-top: 2rem;"/>
     <h1> Tutor Hub</h1>
     <h2>Welcome to our platform!</h2>
     <p>Please choose your Path:</p>
-    <a href="{%url 'register' %}" class="button">I'm a Student</a>
-    <a href="{% url 'register' %}" class="button">I'm a Tutor</a>
-    <!-- <div/> -->
+    <a href="{%url 'register' %}" class="btn btn-outline-success" style="color: green;">I'm a Student</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-success" style="color: red;">I'm a Tutor</a>
+
+    <div class="auth__alternative">
+      <p>Already have an Account?</p>
+      <!-- <a href="{% url 'login' %}">Log In</a> -->
+      <button type="button" class="btn btn-outline-success"><a href="{% url 'login' %}">Log In</a></button>
+    </div>
+    
   </div>
 
 

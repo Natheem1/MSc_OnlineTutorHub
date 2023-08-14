@@ -24,7 +24,7 @@ Header/Navigation Section
 
 .header__logo > img {
   max-width: 100px;
-  /* margin-right: 100px; */
+  margin-right: 100px;
 }
 
 .header__nav > ul {
@@ -704,6 +704,14 @@ Form Page Section
   color: var(--color-sub);
   margin-bottom: 1rem;
   margin-top: 2rem;
+}
+
+.alert {
+  position: fixed;
+  left: 50%;
+  top: 135px;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
 }
 
 /*=======================

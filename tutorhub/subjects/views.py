@@ -44,7 +44,7 @@ def subject(request, pk):
 
         subjectObj.getVoteCount
 
-        messages.success(request, 'Review Successful Submitted')
+        messages.success(request, 'Review Successfully Submitted')
         return redirect('subject', pk=subjectObj.id)
 
     tags = subjectObj.tags.all()

@@ -3,11 +3,76 @@
 
 {% block content %}
 
-<h1> STUDENT PROFILES</h1>
+<!-- <h1> STUDENT PROFILES</h1>
 <ul>
-    {% for student in students %}
+    {% for allstudent in allstudents %}
         <li> Student Name: <a href="{% url 'student' student.id %}">{{student.username}}</a> - - - - GOAL:{{student.short_goal}}</li>
     {% endfor %}
-</ul>
+</ul> -->
+
+<!-- Main Section -->
+<main class="home">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>CONNECT WITH <span>FELLOW PEERS</span></h2>
+          <h2>FROM AROUND THE WORLD</h2>
+        </div>
+
+        <div class="hero-section__search">
+          <form class="form" action="{% url 'student-profiles' %}" method="GET">
+            <div class="form__field">
+              <label for="formInput#search">Search by Subjects & Tutors</label>
+              <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                value="{{search_query}}" placeholder="Search by Subjects/Tutors" />
+            </div>
+
+            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+          </form>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Search Result: DevList -->
+    <section class="devlist">
+      <div class="container">
+        <div class="grid grid--three">
+
+          {% for student in students %}
+          <div class="column card">
+            <div class="dev">
+              <a href="{% url 'student-profile' student.id %}" class="card__body">
+                <div class="dev__profile">
+                  <img class="avatar avatar--md" src="{{student.profile_image.url}}" alt="image" />
+                  <div class="dev__meta">
+                    <h3>{{student.username}}</h3>
+                    <h5>{{student.short_goal}}</h5>
+                    <!-- <h5>Tutor Rate: {{tutor.hourly_rate}}</h5> -->
+                  </div>
+                </div>
+                <p class="dev__info">{{student.bio|slice:"165"}}</p>
+
+                
+                
+                <div class="dev__skills">
+                  {% for subject in student.interested_subjects.all %}
+                  <span class="tag tag--pill tag--main">
+                    <small>{{subject.subject_name}}</small>
+                  </span>
+                  {% endfor %}
+                </div>
+                
+
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+  </main>
 
 {% endblock content %}
+<!-- href="{% url 'student' student.id %}" -->
