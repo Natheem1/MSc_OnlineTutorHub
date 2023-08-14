@@ -44,7 +44,7 @@ class StudentProfileForm(ModelForm):
     class Meta:
         model = StudentProfile
         fields = ['name', 'username', 'email', 'first_name', 'last_name', 'short_goal',
-                   'bio', 'Year_group', 'interested_subjects', 'profile_image', 'parent_name', 
+                   'bio', 'Year_group', 'profile_image', 'parent_name', 
                    'parent_email', 'parent_phone', 'preferred_availability']
         
     
@@ -61,7 +61,7 @@ class TeachSubjectForm(ModelForm):
         model = MainSubjSkill
         fields = '__all__'
         exclude = ['owner']
-
+        
     def __init__(self,*args, **kwargs):
         super(TeachSubjectForm, self).__init__(*args, **kwargs)
 
@@ -86,6 +86,10 @@ class InterestedSubjectForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
         fields = ['interested_subjects']  # Only the interested_subjects field
+
+        widgets = {
+            'interested_subjects': CheckboxSelectMultiple,
+        }
 
     def __init__(self, *args, **kwargs):
         super(InterestedSubjectForm, self).__init__(*args, **kwargs)

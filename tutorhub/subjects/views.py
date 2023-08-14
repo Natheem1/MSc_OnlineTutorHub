@@ -28,7 +28,7 @@ def addSubject(request):
             subject = form.save(commit=False)
             subject.owner = tutorprofile
             subject.save()
-            return redirect('subjects')
+            return redirect('tutor-account')
         
     context = {'form': form}
     return render(request, 'subjects/subject-form.html', context)
@@ -44,7 +44,7 @@ def editSubject(request, pk):
         form = SubjectForm(request.POST, request.FILES, instance=subject)
         if form .is_valid():
             form.save()
-            return redirect('subjects')
+            return redirect('tutor-account')
         
     context = {'form': form}
     return render(request, 'subjects/subject-form.html', context)
@@ -55,6 +55,6 @@ def deleteSubject(request, pk):
     subject = tutorprofile.subject_set.get(id=pk)
     if request.method == 'POST':
         subject.delete()
-        return redirect('subjects')
+        return redirect('tutor-account')
     context = {'object': subject}
     return render(request, 'delete-template.html', context)

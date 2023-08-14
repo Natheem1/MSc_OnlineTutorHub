@@ -29,7 +29,17 @@
             <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{%  url 'add-interested-subject' %}"><i class="im im-plus"></i> Add More Subjects</a>
           </div>
 
-          <table class="settings__table">
+              {% for subject in interested %}
+              <div class="devInfo__otherSkillss">
+                <span class="tag tag--pill tag--subi tag--lg">
+                  <small>{{subject.subject_name}}</small>
+                </span>
+              </div>
+              {% endfor %}
+
+
+
+          <!-- <table class="settings__table">
             {% for subject in interested %}
             <tr>
               <td class="settings__tableInfo">
@@ -43,7 +53,12 @@
               </td>
             </tr>
             {% endfor %}
-          </table>
+          </table> -->
+
+
+
+
+
 
           <!-- <div class="settings">
             <h3 class="settings__title">Projects</h3>

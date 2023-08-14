@@ -778,3 +778,28 @@ Form Page Section
 .settings__tableActions {
   text-align: right;
 }
+
+/*=======================
+  Student account Settings 
+  Interested Tag 
+========================*/
+
+.devInfo__otherSkillss {
+  display:inline-block;
+  margin: 3px;
+}
+
+.devInfo__otherSkillss .tag--subi, .tag--subi > small {
+  background: #f3ea42;
+  font-size: 15px;
+  color: #37517e;
+}
+
+/*=======================
+  single Subject Page 
+========================*/
+
+.column.column--2of3 img {
+  height: 450px;
+  width: 600px;
+}

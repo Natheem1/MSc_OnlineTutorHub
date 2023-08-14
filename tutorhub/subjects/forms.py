@@ -7,13 +7,13 @@ class SubjectForm(ModelForm):
         model = Subject
         fields = ['title', 'subject_image','description',  'tags']
 
-    #     widgets = {
-    #         'tags': forms.CheckboxSelectMultiple(),
-    #     }
+        widgets = {
+            'tags': forms.CheckboxSelectMultiple(),
+        }
 
     
-    def _init_(self, *args, **kwargs):
-        super(SubjectForm, self)._init_(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(SubjectForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
