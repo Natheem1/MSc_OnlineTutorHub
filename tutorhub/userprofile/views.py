@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm
 from django.db import IntegrityError
-# from django.contrib.auth.forms import UserCreationForm
+from .utils import searchTutors
 from users.models import NewUser
 from . models import TutorProfile, StudentProfile, MainSubjSkill
 
@@ -78,10 +78,11 @@ def registerUser(request):
     return render(request, 'userprofile/login-signup.html', context)
 
 
-#ALL TUTOR PROFILES - DONE
+#ALL TUTOR PROFILES WITH SEARCH FUNCTION - DONE
 def tutorProfiles(request):
-    tutors = TutorProfile.objects.all()
-    context = {'tutors': tutors}
+    tutors, search_query = searchTutors(request)
+    
+    context = {'tutors': tutors, 'search_query': search_query}
     return render(request, 'userprofile/tutor-profiles.html', context)
 
 

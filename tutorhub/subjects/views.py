@@ -1,14 +1,31 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Subject
+from django.db.models import Q
+from .models import Subject, Tag
 from .forms import SubjectForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
+from .utils import searchsubjects
 
 
 
 def subjects(request):
-    subjects = Subject.objects.all()
-    context = {'subjects': subjects}
+    subjects, search_query = searchsubjects(request)
+
+    page = request.GET.get('page') 
+    results = 3 
+    paginator = Paginator(subjects, results)
+
+    try:
+        subjects = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        subjects = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        subjects = paginator.page(page)
+    
+    context = {'subjects': subjects, 'search_qurey': search_query, 'paginator': paginator}
     return render(request, 'subjects/subjects.html', {'subjects':subjects})
 
 

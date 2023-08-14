@@ -14,11 +14,11 @@
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="#" method="get">
+          <form class="form" action="{% url 'subjects' %}" method="GET">
             <div class="form__field">
               <label for="formInput#search">Search By Subjects </label>
-              <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Search by Subject " />
+              <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                value="{{search_query}}" placeholder="Search by Subject " />
             </div>
 
             <input class="btn btn--sub btn--lg" type="submit" value="Search" />
@@ -45,7 +45,7 @@
 
                     
                   <div class="project__tags">
-                    {% for tag in subjects.tags.all %}
+                    {% for tag in subject.tags.all %}
                     <span class="tag tag--pill tag--main">
                       <small>{{tag}}</small>
                     </span>
