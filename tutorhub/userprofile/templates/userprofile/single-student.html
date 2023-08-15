@@ -23,7 +23,7 @@
         <!-- Guardian/Parent Details Card  -->
         <div class="card text-center1">
           <div class="card__body dev">
-            <img class="avatar avatar--xl" src="{{studentObj.profile_image.url}}" />
+            <img class="avatar avatar--xl2" src="{{studentObj.parent_pro_image.url}}" />
             <h5>Parent Contact Details</h5>
             <h2 class="dev__name">{{studentObj.parent_name}}</h2>
             <p class="dev__title">Email: {{studentObj.parent_email}}</p>
@@ -40,30 +40,51 @@
           <p class="devInfo__about">{{studentObj.bio}}</p>
         </div>
 
+
         <div class="devInfo">
           <h3 class="devInfo__title">Subjects I'm Interested in</h3>
           <div class="devInfo__skills">
+              {% for subject in studentprofile.interested_subjects.all %}
+              <div class="devSkill">
+                  <h4 class="devSkill__title">{{ subject.name }}</h4>
+                  <!-- <p class="devSkill__info">{{ subject.description }}</p> -->
+              </div>
+              {% endfor %}
+              
+              <!-- {% if studentprofile.interested_subjects.count == 0 %}
+              <h3 class="devInfo__subtitle">No subjects added yet.</h3>
+              {% else %}
+              <h3 class="devInfo__subtitle">{{ studentprofile.interested_subjects.count }} subjects added.</h3>
+              <div class="devInfo__otherSkills">
+                  <span class="tag tag--pill tag--sub tag--lg">
+                      <small>Additional information can go here.</small>
+                  </span>
+              </div>
+              {% endif %} -->
+          </div>
+        </div>
+      
+
+        <!-- <div class="devInfo">
+          <h3 class="devInfo__title">Subjects I'm Interested in</h3>
+          <div class="devInfo__skills">
+
             <div class="devSkill">
-              <h4 class="devSkill__title">JavaScript</h4>
-              <p class="devSkill__info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae neque voluptatum ut? Quaerat, ea
-                cumque! Dolorum provident esse molestias commodi odit sapiente quod quasi corrupti obcaecati? Nobis
-                ex temporibus quaerat!
-              </p>
+              <h4 class="devSkill__title">    </h4>
+              <p class="devSkill__info">    </p>
             </div>
             
-            
-
-            <h3 class="devInfo__subtitle">Other Skills</h3>
+            <h3 class="devInfo__subtitle">  -----  </h3>
             <div class="devInfo__otherSkills">
               <span class="tag tag--pill tag--sub tag--lg">
-                <small>Figma</small>
+                <small>  </small>
               </span>
               
             </div>
           </div>
-        </div>
-        <div class="devInfo">
+        </div> -->
+
+        <!-- <div class="devInfo">
           <h3 class="devInfo__title">Projects</h3>
           <div class="grid grid--two">
 
@@ -93,13 +114,9 @@
                 </a>
               </div>
             </div>
-
-            
-
-            
-
           </div>
-        </div>
+        </div> -->
+
       </div>
     </div>
   </div>

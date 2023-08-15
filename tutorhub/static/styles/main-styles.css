@@ -768,6 +768,12 @@ Avatar Section
   width: 20rem;
 }
 
+.avatar--xl2 {
+  height: 12rem;
+  width: 12rem;
+  margin-left: 7rem;
+}
+
 .avatar--lg {
   height: 15rem;
   width: 15rem;

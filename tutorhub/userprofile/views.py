@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm
+from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm, StudentProfileParentForm
 from django.db import IntegrityError
 from .utils import searchTutors
 from users.models import NewUser
@@ -215,16 +215,33 @@ def studentAccount(request):
 def editSAccount(request): 
     stuprofile = request.user.studentprofile
     studentform = StudentProfileForm(instance=stuprofile)
-
+   
     if request.method == 'POST':
         studentform = StudentProfileForm(request.POST, request.FILES, instance=stuprofile)
         if studentform.is_valid():
             studentform.save()
 
             return redirect('student-account')
-
+        
     context = {'studentform': studentform}
     return render(request, 'userprofile/studentprofile-form.html', context)
+
+
+#EDIT STUDENT PROFILE PARENT ACCOUNT  - Student
+@login_required(login_url='login')
+def editSPAccount(request): 
+    stuprofile = request.user.studentprofile
+    studentparentform = StudentProfileParentForm(instance=stuprofile)
+
+    if request.method == 'POST':
+        studentparentform = StudentProfileParentForm(request.POST, request.FILES, instance=stuprofile)
+        if studentparentform.is_valid():
+            studentparentform.save()
+
+            return redirect('student-account')
+
+    context = {'studentparentform':studentparentform}
+    return render(request, 'userprofile/studentparent-form.html', context)
 
 
 

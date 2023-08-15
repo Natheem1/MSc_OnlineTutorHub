@@ -27,12 +27,14 @@ class StudentProfile(models.Model):
     interested_subjects = models.ManyToManyField('MainSubjSkill',blank=True)
 
     profile_image = models.ImageField(null=True, blank=True, upload_to='student-profile-img/', 
-                                      default="defaultprofileimg/default.png")
+                                      default="defaultprofileimg/studentdefault.png")
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     parent_name = models.CharField(max_length=150, blank=True, null=True)
     parent_email = models.EmailField(max_length=500, blank=True, null=True)
     parent_phone = models.CharField(max_length=20, blank=True, null=True)
+    parent_pro_image = models.ImageField(null=True, blank=True, upload_to='student-parent-profile-img/', 
+                                      default="defaultprofileimg/parentm.png")
 
     PREFERRED_AVAILABILITY_CHOICES = [
         ('Weekday mornings', 'Weekday mornings'),

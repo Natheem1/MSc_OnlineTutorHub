@@ -20,6 +20,7 @@ urlpatterns = [
 
     path('edit-tutor/account/', views.editTAccount, name="edit-taccount"),
     path('edit-student/account/', views.editSAccount, name="edit-saccount"),
+    path('edit-studentparent/account/', views.editSPAccount, name="edit-spaccount"),
 
 
     path('add-teaching/subject/', views.addTeachSubject, name="add-teach-subject"),

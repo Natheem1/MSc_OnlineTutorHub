@@ -54,12 +54,24 @@ class StudentProfileForm(ModelForm):
     class Meta:
         model = StudentProfile
         fields = ['name', 'username', 'email', 'first_name', 'last_name', 'short_goal',
-                   'bio', 'Year_group', 'profile_image', 'parent_name', 
-                   'parent_email', 'parent_phone', 'preferred_availability']
+                   'bio', 'Year_group', 'profile_image', 'preferred_availability']
         
     
     def __init__(self,*args, **kwargs):
         super(StudentProfileForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
+
+class StudentProfileParentForm(ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['parent_pro_image','parent_name', 'parent_email', 'parent_phone']
+        
+    
+    def __init__(self,*args, **kwargs):
+        super(StudentProfileParentForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})

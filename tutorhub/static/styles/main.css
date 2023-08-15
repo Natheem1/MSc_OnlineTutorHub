@@ -594,9 +594,15 @@ Sinlge Tutors Profile Card Layout Section
 ========================*/
 
 /* Profile image styling  */
-.profile.my-md img{
+.profile.my-md .dev__avatar img{
   height: 215px;
   width: 230px;
+}
+
+.profile.my-md .avatar.avatar--xl1{
+  height: 115px;
+  width: 130px;
+  margin-left: 6rem;
 }
 
 /* Subject Card Image styling on single tutor page */
@@ -720,7 +726,12 @@ Form Page Section
 
 .settingsPage .dev > .settings__btn {
   display: inline-block;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
+}
+
+.settingsPage .dev > .settings__btn1 {
+  display: inline-block;
+  margin-left: 10rem;
 }
 
 .settings {

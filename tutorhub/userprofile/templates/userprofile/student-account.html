@@ -16,6 +16,21 @@
               <!-- <p class="dev__location">Based in Florida, USA</p> -->
             </div>
           </div>
+        
+          <!-- Guardian/Parent Details Card  -->
+        <div class="card text-center1">
+          <div class="card__body dev">
+            <a class="tag tag--pill tag--main settings__btn1" href="{% url 'edit-spaccount' %}"><i class="im im-edit"></i> Edit</a>
+            <img class="avatar avatar--xl1" src="{{stuaccount.parent_pro_image.url}}" />
+            <h5>Parent Contact Details</h5>
+            <h2 class="dev__name">{{stuaccount.parent_name}}</h2>
+            <p class="dev__title">Email: {{stuaccount.parent_email}}</p>
+            <p class="dev__location">Contact Number: {{stuaccount.parent_phone}}</p>
+            <br>
+            <!-- <a href="#" class="btn btn--sub btn--lg">Send Message </a> -->
+          </div>
+        </div>
+
         </div>
 
         <div class="column column--2of3">
@@ -24,18 +39,47 @@
             <p class="devInfo__about">{{stuaccount.bio}}</p>
           </div>
 
-          <div class="settings">
+          <!-- <div class="settings">
             <h3 class="settings__title">Subjects Interested In</h3>
             <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{%  url 'add-interested-subject' %}"><i class="im im-plus"></i> Add More Subjects</a>
           </div>
 
-              {% for subject in interested %}
-              <div class="devInfo__otherSkillss">
-                <span class="tag tag--pill tag--subi tag--lg">
-                  <small>{{subject.subject_name}}</small>
-                </span>
+
+        
+            {% for subject in interested %}
+            <div class="devInfo__otherSkillss">
+              <span class="tag tag--pill tag--subi tag--lg">
+                <small>{{subject.subject_name}}</small>
+              </span>
+            </div>
+            {% endfor %} -->
+
+
+            <div class="settings">
+              <h3 class="settings__title">Subjects Interested In</h3>
+              <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'add-interested-subject' %}">
+                  <i class="im im-plus"></i> Add More Subjects
+              </a>
+          </div>
+          
+          {% if interested %}
+          <div class="devInfo">
+              <div class="devInfo__skills">
+                  {% for subject in interested %}
+                  <div class="devInfo__otherSkills">
+                      <span class="tag tag--pill tag--subi tag--lg">
+                          <small>{{ subject.subject_name }}</small>
+                      </span>
+                  </div>
+                  {% endfor %}
               </div>
-              {% endfor %}
+          </div>
+          {% else %}
+          <div class="devInfo">
+              <h3 class="devInfo__title">No subjects added yet.</h3>
+          </div>
+          {% endif %}
+          
 
 
 
