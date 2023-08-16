@@ -245,6 +245,17 @@
     margin-bottom: 0.5rem;
     overflow: hidden;
   }
+
+  .review__card {
+    border-radius: 1rem;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-light);
+    width: auto;
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
   
   .card__link {
     transition: all 0.3s ease-in;
@@ -333,6 +344,11 @@
 .text-center {
   text-align: center;
 }
+
+.text-centerr {
+  text-align: center;
+}
+
 
 .m-sm {
   margin: 1rem;
@@ -585,6 +601,16 @@ Button Section
   color: var(--color-white);
 }
 
+.btn--subss {
+  background-color: rgb(189, 174, 189);
+  color: var(--color-white);
+}
+
+.btn--sub1 {
+  background-color: #677180;
+  color: var(--color-white);
+}
+
 .btn.btn--sub--outline {
   background-color: transparent;
   color: var(--color-sub);
@@ -604,6 +630,17 @@ Button Section
 .btn--lg {
   font-size: 1.8rem;
   padding: 1.2rem 4.5rem;
+}
+
+.btn--lgs {
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+
+.btn--lgss {
+  font-size: 1.8rem;
+  padding: -1.8rem 4.5rem;
+  margin-top: 1rem;
 }
 
 .btn--main--link,
@@ -772,6 +809,11 @@ Avatar Section
   height: 12rem;
   width: 12rem;
   margin-left: 7rem;
+}
+
+.avatar--xlr {
+  height: 12rem;
+  width: 12rem;
 }
 
 .avatar--lg {

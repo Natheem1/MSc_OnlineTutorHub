@@ -149,6 +149,118 @@ Header/Navigation Section
   }
 }
 
+/* dropdown box styling  */
+
+/* Dropdown menu styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menutut {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.dropdown-menustu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -15px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-menustu {
+  display: block;
+}
+
+.dropdown:hover .dropdown-menutut {
+  display: block;
+}
+
+.dropdown-menustu li {
+  list-style: none;
+}
+
+.dropdown-menutut li {
+  list-style: none;
+}
+
+.dropdown-menustu li a {
+  display: block;
+  padding: 10px;
+  text-align: left;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menutut li a {
+  display: block;
+  padding: 10px;
+  text-align: left;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menustu li a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menutut li a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: flex;
+  padding: 6px;
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px;
+  text-align: left;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+}
 
 /*=======================
 Login/SignUp Page Styles

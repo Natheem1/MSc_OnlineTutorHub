@@ -8,6 +8,20 @@
       <div class="layout">
 
         <div class="column column--1of3">
+          <!-- Contact Tutor Card  -->
+          <div class="review__card text-centerr">
+            <h2>Book Now </h2>
+            <div class="card__body dev">
+              <img class="avatar avatar--xlr" src="{{ tutorprofile.profile_image.url }}" />
+              <a class="tutor__name" href="{% url 'tutor-profile' tutorprofile.id %}"> <h2 class="dev__name">{{ tutorprofile.name}} </h2> </a>
+              <p class="dev__title">{{ tutorprofile.short_intro}}</p>
+              <p class="dev__location">Based in {{ tutorprofile.location}}</p>
+              <br>
+              <a href="#" class="btn btn--sub btn--lgs">Send Message </a>
+
+            </div>
+          </div>
+
           <h3 class="singleProject__subtitle">Features</h3>
           <div class="singleProject__toolStack">
             {% for tag in subject.tags.all %}
@@ -20,7 +34,7 @@
 
         <div class="column column--2of3">
           <img class="singleProject__preview" src="{{subject.subject_image.url}}" alt="portfolio thumbnail" />
-          <a href="{% url 'tutor-profile' subject.owner.id%}" class="singleProject__developer">By {{subject.owner.name}}</a>
+          <a href="{% url 'tutor-profile' subject.owner.id%}" class="singleProject__developer">By {{subject.owner.name}}  <a href="#" class="btn btn--subss btn--lgss">Book Lesson </a> </a> 
           <h2 class="singleProject__title">{{subject.title}}</h2>
           <h3 class="singleProject__subtitle">About the Subject</h3>
           <div class="singleProject__info">

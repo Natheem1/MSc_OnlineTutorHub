@@ -60,9 +60,12 @@ def subject(request, pk):
 
     tags = subjectObj.tags.all()
 
+    tutorprofile = subjectObj.owner
+
     user_type = request.user.user_type if request.user.is_authenticated and request.user.user_type == 'tutor' else None
 
-    return render(request, 'subjects/single-subject.html', {'subject': subjectObj, 'tags': tags, 'form': form, 'user_type': user_type})
+    return render(request, 'subjects/single-subject.html', {'subject': subjectObj, 'tags': tags,
+                                                             'form': form, 'user_type': user_type, 'tutorprofile': tutorprofile})
 
 
 @login_required(login_url='login')
