@@ -19,6 +19,11 @@ urlpatterns = [
     path('student-account/', views.studentAccount, name="student-account"),
 
     path('edit-tutor/account/', views.editTAccount, name="edit-taccount"),
+    path('edit-tutor/id/account', views.editTutorId, name="edit-tidaccount"),
+    path('edit-tutor/degree/account', views.editTutorDegree, name="edit-tdegreeaccount"),
+    path('view-tutor-id/', views.viewTutorId,name="view-tutorid" ),
+    path('view-tutor-degree/', views.viewTutorDegree,name="view-tutordegree" ),
+
     path('edit-student/account/', views.editSAccount, name="edit-saccount"),
     path('edit-studentparent/account/', views.editSPAccount, name="edit-spaccount"),
 

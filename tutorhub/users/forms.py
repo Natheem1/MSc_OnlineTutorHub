@@ -30,6 +30,9 @@ class MyUserCreationForm(UserCreationForm):
 
 
 class TutorProfileForm(ModelForm):
+    revert_profileimage = forms.BooleanField(label='Remove Profile Image Set to Default', required=False)
+
+
     class Meta:
         model = TutorProfile
         fields = ['name', 'username','email', 'first_name', 'last_name', 'location',
@@ -50,6 +53,31 @@ class TutorProfileForm(ModelForm):
 
 
 
+class TutorIDForm(ModelForm):
+    class Meta:
+        model = TutorProfile
+        fields = ['identification']
+        
+    
+    def __init__(self,*args, **kwargs):
+        super(TutorIDForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
+
+class TutorDegreeForm(ModelForm):
+    class Meta:
+        model = TutorProfile
+        fields = ['degree']
+
+    def __init__(self,*args, **kwargs):
+        super(TutorDegreeForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
+
 class StudentProfileForm(ModelForm):
     class Meta:
         model = StudentProfile
@@ -62,6 +90,7 @@ class StudentProfileForm(ModelForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
+
 
 
 class StudentProfileParentForm(ModelForm):
@@ -90,19 +119,6 @@ class TeachSubjectForm(ModelForm):
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
 
-
-
-# class InterestedSubjectForm(ModelForm):
-#     class Meta:
-#         model = MainSubjSkill
-#         fields = '__all__'
-#         exclude = ['owner']
-
-#     def __init__(self,*args, **kwargs):
-#         super(InterestedSubjectForm, self).__init__(*args, **kwargs)
-
-#         for name, field in self.fields.items():
-#             field.widget.attrs.update({'class': 'input'})
 
 class InterestedSubjectForm(forms.ModelForm):
     class Meta:

@@ -645,6 +645,10 @@ Tag Section
   cursor: pointer;
 }
 
+.tag1 {
+  background-color: #d8dbf7;
+}
+
 .tag:not(:last-child) {
   margin-right: 0.25rem;
   margin-bottom: 0.75rem;
@@ -808,8 +812,20 @@ Form Page Section
   margin: 3px;
 }
 
+.devInfo__otherSkillsss {
+  display:inline-block;
+  margin: 3px;
+  margin-bottom: 1px;
+  margin-top: 16px;
+}
+
 .devInfo__otherSkillss .tag--subi, .tag--subi > small {
   background: #f3ea42;
+  font-size: 15px;
+  color: #37517e;
+}
+
+.devInfo__otherSkillsss .tag--subii, .tag--subii > small {
   font-size: 15px;
   color: #37517e;
 }
@@ -862,8 +878,25 @@ Form Page Section
   font-size: 1.45rem;
 }
 
+.review__date {
+  font-size: 10px;
+}
 
 
 
 
-/*========== Toggle Button Creation ==========*/
+
+/*========== Tutor Profile Default Message ==========*/
+
+.default__message {
+  display: block;
+  color: rgb(221, 96, 96);
+}
+
+
+/*========== Tutor Profile View Id Page ==========*/
+
+.tutor__id {
+  height: 550px;
+  width: 550px;
+}

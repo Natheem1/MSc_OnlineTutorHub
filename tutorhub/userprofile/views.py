@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm, StudentProfileParentForm
+from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm, StudentProfileParentForm, TutorIDForm, TutorDegreeForm
 from django.db import IntegrityError
 from .utils import searchTutors
 from users.models import NewUser
@@ -87,7 +87,7 @@ def tutorProfiles(request):
     tutors, search_query = searchTutors(request)
     
     context = {'tutors': tutors, 'search_query': search_query}
-    return render(request, 'userprofile/tutor-profiles.html', context)
+    return render(request, 'userprofile/tutorprofile/tutor-profiles.html', context)
 
 
 
@@ -100,7 +100,7 @@ def tutorProfile(request,pk):
 
     context = {'tutorObj': tutorObj, 'mainSubjects': mainSubjects, 
                'otherSubjects': otherSubjects}
-    return render(request, 'userprofile/single-tutor.html', context)
+    return render(request, 'userprofile/tutorprofile/single-tutor.html', context)
 
 
 
@@ -113,7 +113,24 @@ def tutorAccount(request):
     subjects = account.subject_set.all()
     
     context = {'account': account, 'teachings': teachings, 'subjects': subjects}
-    return render(request, 'userprofile/tutor-account.html', context)
+    return render(request, 'userprofile/tutorprofile/tutor-account.html', context)
+
+
+#EDIT USER PROFILE ACCOUNT - Tutor
+# @login_required(login_url='login')
+# def editTAccount(request):
+#     tutprofile = request.user.tutorprofile
+#     tutorform = TutorProfileForm(instance=tutprofile)
+
+#     if request.method == 'POST':
+#         tutorform = TutorProfileForm(request.POST, request.FILES, instance=tutprofile)
+#         if tutorform.is_valid():
+#             tutorform.save()
+
+#             return redirect('tutor-account')
+ 
+#     context = {'tutorform': tutorform}
+#     return render(request, 'userprofile/tutorprofile-form.html', context)
 
 
 #EDIT USER PROFILE ACCOUNT - Tutor
@@ -125,12 +142,68 @@ def editTAccount(request):
     if request.method == 'POST':
         tutorform = TutorProfileForm(request.POST, request.FILES, instance=tutprofile)
         if tutorform.is_valid():
-            tutorform.save()
+            tutor_profile = tutorform.save(commit=False)
+            
+            if tutorform.cleaned_data['revert_profileimage']:
+                tutor_profile.profile_image_uploaded = False
+                tutor_profile.profile_image = tutor_profile._meta.get_field('profile_image').get_default()
+            
+            tutor_profile.save()
 
             return redirect('tutor-account')
  
     context = {'tutorform': tutorform}
-    return render(request, 'userprofile/tutorprofile-form.html', context)
+    return render(request, 'userprofile/tutorprofile/tutorprofile-form.html', context)
+
+
+#TUTOR ID FORM
+@login_required(login_url='login')
+def editTutorId(request):
+    tutprofile = request.user.tutorprofile
+    tutoridform = TutorIDForm(instance=tutprofile)
+
+    if request.method == 'POST':
+        tutoridform = TutorIDForm(request.POST, request.FILES, instance=tutprofile)
+        if tutoridform.is_valid():
+            tutoridform.save()
+
+            return redirect('tutor-account')
+        
+    context = {'tutoridform': tutoridform}
+    return render(request, 'userprofile/tutorprofile/tutorid-form.html', context)
+
+#VIEW TUTOR ID DOCUMENT 
+@login_required(login_url='login')
+def viewTutorId(request):
+    tutorid = request.user.tutorprofile
+
+    context = {'tutorid':tutorid}
+    return render(request, 'userprofile/tutorprofile/viewtutorid.html', context) 
+
+#TUTOR DEGREE FORM
+@login_required(login_url='login')
+def editTutorDegree(request):
+    tutprofile = request.user.tutorprofile
+    tutordegreeform = TutorDegreeForm(instance=tutprofile)
+
+    if request.method == 'POST':
+        tutoridform = TutorDegreeForm(request.POST, request.FILES, instance=tutprofile)
+        if tutoridform.is_valid():
+            tutoridform.save()
+
+            return redirect('tutor-account')
+        
+    context = {'tutordegreeform': tutordegreeform}
+    return render(request, 'userprofile/tutorprofile/tutordegree-form.html', context)
+
+#VIEW TUTOR DEGREE DOCUMENT 
+@login_required(login_url='login')
+def viewTutorDegree(request):
+    tutordegree = request.user.tutorprofile
+
+    context = {'tutordegree':tutordegree}
+    return render(request, 'userprofile/tutorprofile/viewtutordegree.html', context) 
+
 
 #ADD TEACHING SUBJECTS - Tutor
 @login_required(login_url='login')
@@ -148,7 +221,7 @@ def addTeachSubject(request):
             return redirect('tutor-account')
         
     context = {'form': form}
-    return render(request, 'userprofile/teachingsubjects-form.html', context)
+    return render(request, 'userprofile/tutorprofile/teachingsubjects-form.html', context)
 
 # UPDATE TEACHING SUBJECTS - Tutor
 @login_required(login_url='login')
@@ -165,7 +238,7 @@ def editTeachSubject(request, pk):
             return redirect('tutor-account')
         
     context = {'form': form, 'profile':profile, 'subject':subject}
-    return render(request, 'userprofile/teachingsubjects-form.html', context)
+    return render(request, 'userprofile/tutorprofile/teachingsubjects-form.html', context)
 
 #DELETE TEACHING SUBJECTS - Tutor
 @login_required(login_url='login')
@@ -185,17 +258,18 @@ def deleteTeachSubject(request, pk):
 
 
 
+
 #ALL STUDENT PROFILES 
 def studentProfiles(request):
     students = StudentProfile.objects.all()
     context = {'students': students}
-    return render (request, 'userprofile/student-profiles.html', context)
+    return render (request, 'userprofile/studentprofile/student-profiles.html', context)
 
 #SINGLE STUDENT PROFILE
 def studentProfile(request,pk):
     studentObj = StudentProfile.objects.get(id=pk)
     context = {'studentObj': studentObj}
-    return render(request, 'userprofile/single-student.html', context)
+    return render(request, 'userprofile/studentprofile/single-student.html', context)
 
 
 #STUDENT ACCOUNCT 'CRUD' - Student
@@ -206,7 +280,7 @@ def studentAccount(request):
     interested = stuaccount.interested_subjects.all()
   
     context = {'stuaccount': stuaccount, 'interested':interested}
-    return render(request, 'userprofile/student-account.html', context)
+    return render(request, 'userprofile/studentprofile/student-account.html', context)
 
 
 
@@ -224,7 +298,7 @@ def editSAccount(request):
             return redirect('student-account')
         
     context = {'studentform': studentform}
-    return render(request, 'userprofile/studentprofile-form.html', context)
+    return render(request, 'userprofile/studentprofile/studentprofile-form.html', context)
 
 
 #EDIT STUDENT PROFILE PARENT ACCOUNT  - Student
@@ -241,7 +315,7 @@ def editSPAccount(request):
             return redirect('student-account')
 
     context = {'studentparentform':studentparentform}
-    return render(request, 'userprofile/studentparent-form.html', context)
+    return render(request, 'userprofile/studentprofile/studentparent-form.html', context)
 
 
 
@@ -259,4 +333,4 @@ def addIntrestedSubject(request):
             return redirect('student-account')
 
     context = {'form': form}
-    return render(request, 'userprofile/interestedsubjects-form.html', context)
+    return render(request, 'userprofile/studentprofile/interestedsubjects-form.html', context)

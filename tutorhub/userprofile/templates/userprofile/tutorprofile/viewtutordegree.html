@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="card text-center">
+    <div class="card__body dev">
+        <b style="display: block; font-size: large;">{{tutordegree.first_name}} Degree Documentation </b>
+        <img class="tutor__id" src="{{tutordegree.degree.url}}" />
+    </div>
+  </div>
+
+{% endblock content %}

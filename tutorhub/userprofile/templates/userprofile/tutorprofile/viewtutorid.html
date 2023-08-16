@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="card text-center">
+    <div class="card__body dev">
+        <b style="display: block; font-size: large;">{{tutorid.first_name}} Identification Document </b>
+        <img class="tutor__id" src="{{tutorid.identification.url}}" />
+    </div>
+  </div>
+
+{% endblock content %}

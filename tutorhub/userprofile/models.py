@@ -72,6 +72,14 @@ class TutorProfile(models.Model):
     teaching_subjects = models.ManyToManyField('MainSubjSkill',blank=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to='tutor-profile-img/', 
                                       default="defaultprofileimg/default.png")
+    profile_image_uploaded = models.BooleanField(default=False)
+    
+    
+    identification = models.ImageField(upload_to='tutor-id/', default="default-image/identification.png")
+    identification_uploaded = models.BooleanField(default=False)
+
+    degree = models.ImageField(null=True, blank=True, upload_to='tutor-degree/', default="default-image/degree.png")
+    degree_uploaded = models.BooleanField(default=False)
     
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, 
@@ -79,6 +87,8 @@ class TutorProfile(models.Model):
 
     def __str__(self):
         return str(self.username)
+    
+    
     
 
 

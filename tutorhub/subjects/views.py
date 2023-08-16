@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q
-from .models import Subject, Tag
+from .models import Subject, Tag, Review
 from .forms import SubjectForm, ReviewForm
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from .utils import searchsubjects
+from datetime import timedelta
+from django.utils import timezone
 
 
 
@@ -40,6 +42,15 @@ def subject(request, pk):
         review = form.save(commit=False)
         review.subject = subjectObj
         review.owner = request.user.studentprofile
+
+        # Check if the user has submitted a review for the specific subject in the last 2 hours
+        last_review = Review.objects.filter(owner=request.user.studentprofile, subject=subjectObj).order_by('-created').first()
+        if last_review:
+            time_since_last_review = timezone.now() - last_review.created
+            if time_since_last_review < timedelta(hours=2):
+                messages.error(request, 'You Already Submitted a Review - Wait 5 hours ')
+                return redirect('subjects')  
+
         review.save()
 
         subjectObj.getVoteCount
@@ -52,6 +63,7 @@ def subject(request, pk):
     user_type = request.user.user_type if request.user.is_authenticated and request.user.user_type == 'tutor' else None
 
     return render(request, 'subjects/single-subject.html', {'subject': subjectObj, 'tags': tags, 'form': form, 'user_type': user_type})
+
 
 @login_required(login_url='login')
 def addSubject(request):
