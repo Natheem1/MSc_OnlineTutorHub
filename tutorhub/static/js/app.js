@@ -12,3 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
       alertWrapper.style.display = 'none'
     )
   }
+
+// Chat Message Box Minimizing 
+
+const chatWidget = document.querySelector('.chat-widget');
+const minimizeButton = chatWidget.querySelector('.minimize-button');
+
+// Toggle the "minimized" class when the minimize button is clicked
+minimizeButton.addEventListener('click', () => {
+    chatWidget.classList.toggle('minimized');
+});

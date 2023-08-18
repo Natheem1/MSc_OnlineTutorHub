@@ -27,6 +27,14 @@ Header/Navigation Section
   margin-right: 100px;
 }
 
+.header__logo__name {
+  color: #ffffff;
+  margin-left: -8rem;
+  font-size: 40px;
+  margin-top: -1rem;
+  font-family: monospace;
+}
+
 .header__nav > ul {
   white-space: nowrap;
   display: inline-flex;
@@ -1128,3 +1136,74 @@ Form Page Section
   height: 550px;
   width: 550px;
 }
+
+/*========== chat messaging  ==========*/
+
+/* Add your CSS styling here */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.chat__header {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chat__content {
+  height: 200px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.input input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+.input button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.minimize-button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.minimized {
+  height: 40px;
+}
+
+.minimize-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+

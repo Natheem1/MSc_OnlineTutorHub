@@ -44,4 +44,6 @@ urlpatterns = [
 
     path('reply-message/<str:pk>/', views.replyMessage, name="reply-message"),
 
+    path('chat-message/', views.chatMessaging, name="chat-messaging"),
+
 ]
