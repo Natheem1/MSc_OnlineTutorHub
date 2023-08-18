@@ -16,7 +16,9 @@
             <p class="dev__title">Goal: {{studentObj.short_goal}}</p>
             <p class="dev__location">Level: {{studentObj.Year_group}}</p>
             <p class="dev__location"> {{studentObj.preferred_availability}}</p>
-            <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            {% if request.user.studentprofile.id != studentObj.id  %}
+            <a href="{% url 'create-message-students' studentObj.id  %}" class="btn btn--sub btn--lg">Send Message</a>
+            {% endif %}
           </div>
         </div>
 
@@ -29,7 +31,9 @@
             <p class="dev__title">Email: {{studentObj.parent_email}}</p>
             <p class="dev__location">Contact Number: {{studentObj.parent_phone}}</p>
             <br>
+            <!-- {% if request.user.studentprofile.id != studentObj.id %}
             <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            {% endif %} -->
           </div>
         </div>
       </div>

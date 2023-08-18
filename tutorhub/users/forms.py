@@ -1,7 +1,7 @@
 from django.forms import ModelForm, CheckboxSelectMultiple
 from django.contrib.auth.forms import UserCreationForm
 from .models import NewUser
-from userprofile .models import StudentProfile, TutorProfile, MainSubjSkill
+from userprofile .models import StudentProfile, TutorProfile, MainSubjSkill, Message
 from django import forms
 
 class MyUserCreationForm(UserCreationForm):
@@ -132,5 +132,33 @@ class InterestedSubjectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(InterestedSubjectForm, self).__init__(*args, **kwargs)
         # Customize the form as needed
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ['subject', 'body',]
+
+        labels = {
+            'subject': 'Reason For Messaging',
+        }
+
+
+    def __init__(self,*args, **kwargs):
+        super(MessageForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
+class MessageReplyForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ['body',]
+
+    def __init__(self,*args, **kwargs):
+        super(MessageReplyForm, self).__init__(*args, **kwargs)
+
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})

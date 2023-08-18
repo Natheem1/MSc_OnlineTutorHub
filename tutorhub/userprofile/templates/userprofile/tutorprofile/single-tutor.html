@@ -14,7 +14,7 @@
               <h2 class="dev__name">{{tutorObj.username}}</h2>
               <p class="dev__title">{{tutorObj.short_intro}}</p>
               <p class="dev__location">{{tutorObj.location}}</p>
-              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+              <a href="{% url 'create-message' tutorObj.id  %}" class="btn btn--sub btn--lg">Send Message </a>
             </div>
           </div>
         </div>

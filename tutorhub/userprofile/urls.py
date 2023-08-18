@@ -34,4 +34,14 @@ urlpatterns = [
 
     path('add-interested/subject/', views.addIntrestedSubject, name="add-interested-subject"),
 
+
+
+    path('inbox/', views.inbox, name="inbox"),
+    path('message/<str:pk>/', views.viewMessage, name="message"),
+    path('send-message/<str:pk>/', views.createMessageTutor, name="create-message"),
+
+    path('send-message-students/<str:pk>/', views.createMessageStudent, name="create-message-students"),
+
+    path('reply-message/<str:pk>/', views.replyMessage, name="reply-message"),
+
 ]

@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm, StudentProfileParentForm, TutorIDForm, TutorDegreeForm
+from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm, StudentProfileParentForm, TutorIDForm, TutorDegreeForm, MessageForm, MessageReplyForm
 from django.db import IntegrityError
 from .utils import searchTutors
 from users.models import NewUser
-from . models import TutorProfile, StudentProfile, MainSubjSkill
+from . models import TutorProfile, StudentProfile, MainSubjSkill, Message
 
 #LOGIN PAGE
 def loginUser(request):
@@ -116,21 +116,6 @@ def tutorAccount(request):
     return render(request, 'userprofile/tutorprofile/tutor-account.html', context)
 
 
-#EDIT USER PROFILE ACCOUNT - Tutor
-# @login_required(login_url='login')
-# def editTAccount(request):
-#     tutprofile = request.user.tutorprofile
-#     tutorform = TutorProfileForm(instance=tutprofile)
-
-#     if request.method == 'POST':
-#         tutorform = TutorProfileForm(request.POST, request.FILES, instance=tutprofile)
-#         if tutorform.is_valid():
-#             tutorform.save()
-
-#             return redirect('tutor-account')
- 
-#     context = {'tutorform': tutorform}
-#     return render(request, 'userprofile/tutorprofile-form.html', context)
 
 
 #EDIT USER PROFILE ACCOUNT - Tutor
@@ -334,3 +319,126 @@ def addIntrestedSubject(request):
 
     context = {'form': form}
     return render(request, 'userprofile/studentprofile/interestedsubjects-form.html', context)
+
+
+
+
+#MESSAGE FUNCTIONS 
+
+#MESSAGE INBOX 
+@login_required(login_url='login')
+def inbox(request):
+    current_user = request.user  
+    all_users = NewUser.objects.all()
+
+    messageRequests = current_user.received_messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+
+    context = {'messageRequests':messageRequests,'unreadCount': unreadCount }
+    return render(request, 'userprofile/inbox.html', context)
+
+
+# MESSAGE VIEW 
+@login_required(login_url='login')
+def viewMessage(request, pk):
+    current_user = request.user
+    message = current_user.received_messages.get(id=pk)
+    if message.is_read == False:
+        message.is_read = True
+        message.save()
+
+    context = {'message': message}
+    return render(request, 'userprofile/message.html', context)
+
+#CREATE MESSGE as a Tutor (User)
+def createMessageTutor(request,pk):
+    sender= request.user
+    trecipient = TutorProfile.objects.get(id=pk)
+    form = MessageForm()
+
+    if not sender.is_authenticated:
+        messages.error(request, 'You Must be Signed In or Registered To Send Messages')
+        return redirect('signup') 
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = sender
+            message.recipient = trecipient.user
+
+            if sender:
+                message.name = sender.username
+                message.email = sender.email
+            message.save()
+
+            messages.success(request, 'Message Sent Successfully')
+
+            return redirect('tutor-profile', pk=trecipient.id)
+
+    context = {'trecipient':trecipient, 'form':form}
+    return render (request, 'userprofile/message-form.html', context)
+
+#CREATE MESSGE as a Student to Students 
+def createMessageStudent(request, pk):
+    sender = request.user 
+    srecipient = StudentProfile.objects.get(id=pk)
+    form = MessageForm
+
+    if not sender.is_authenticated:
+        messages.error(request, 'You Must Be Signed In or Registered To Send Messages')
+        return redirect('signup')
+    
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = sender
+            message.recipient = srecipient.user
+
+            if sender:
+                message.name = sender.username
+                message.email = sender.email
+            message.save()
+
+            messages.success(request, 'Message Sent Successfully')
+
+            return redirect('student-profile', pk=srecipient.id)
+
+    context = {'srecipient':srecipient, 'form':form}
+    return render (request, 'userprofile/message-form.html', context)
+
+# MESSAGE DIRECT REPLY 
+
+def replyMessage(request,pk):
+    sender = request.user
+    original_message = Message.objects.get(id=pk)
+
+
+
+    # Set initial data for the reply form
+    initial_data = {'subject': f"Re: {original_message.subject}"}
+    form = MessageReplyForm(initial=initial_data)
+
+
+    if request.method == 'POST':
+        form = MessageReplyForm(request.POST)
+        if form.is_valid():
+            reply_message = form.save(commit=False)
+            reply_message.sender = sender
+            reply_message.recipient = original_message.sender
+
+            if sender:
+                reply_message.name = sender.username
+                reply_message.email = sender.email
+                reply_message.subject = f"Re: {original_message.subject}"
+            reply_message.save()
+
+            messages.success(request, 'Reply Sent Successfully')
+
+            return redirect('inbox')
+                
+
+
+    context = {'original_message': original_message, 'form': form}
+    return render(request, 'userprofile/replymessage-form.html', context)
