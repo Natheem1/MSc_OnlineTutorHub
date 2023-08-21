@@ -23,7 +23,7 @@
         </div>
 
         <!-- Guardian/Parent Details Card  -->
-        <div class="card text-center1">
+        <!-- <div class="card text-center1">
           <div class="card__body dev">
             <img class="avatar avatar--xl2" src="{{studentObj.parent_pro_image.url}}" />
             <h5>Parent Contact Details</h5>
@@ -31,11 +31,11 @@
             <p class="dev__title">Email: {{studentObj.parent_email}}</p>
             <p class="dev__location">Contact Number: {{studentObj.parent_phone}}</p>
             <br>
-            <!-- {% if request.user.studentprofile.id != studentObj.id %}
+            {% if request.user.studentprofile.id != studentObj.id %}
             <a href="#" class="btn btn--sub btn--lg">Send Message </a>
-            {% endif %} -->
+            {% endif %}
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="column column--2of3">
@@ -65,28 +65,6 @@
       </div>
     </div>
   </div>
-
-
-
-<div class="chat-widget minimized">
-    <div class="chat__header">
-        <div class="minimize-header">
-            <button class="minimize-button">-</button>
-            <p>Chat With {{studentObj.username}}</p>
-        </div>
-    </div>
-    <div class="chat__content">
-        <!-- Display chat messages here -->
-        <!-- Example message: <div class="message">Hello!</div> -->
-    </div>
-    <div class="input">
-        <input type="text" placeholder="Type a message...">
-        <button class="send-button">Send</button>
-    </div>
-</div>
-
-
-
 </main>
 {% endif %}
 {% endif %}

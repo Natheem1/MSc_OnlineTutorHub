@@ -443,7 +443,3 @@ def replyMessage(request,pk):
     context = {'original_message': original_message, 'form': form}
     return render(request, 'userprofile/replymessage-form.html', context)
 
-#Chat Messaging 
-def chatMessaging(request):
-    context = {}
-    return render(request, 'userprofile/chatmessaging.html', context)
