@@ -602,7 +602,7 @@ Button Section
 }
 
 .btn--subss {
-  background-color: rgb(189, 174, 189);
+  background-color: thistle;
   color: var(--color-white);
 }
 

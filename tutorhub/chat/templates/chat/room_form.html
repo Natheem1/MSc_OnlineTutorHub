@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content  %}
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a href="{% url 'all-rooms' %}"><i class="im im-angle-left"><img src="{% static 'images/default-image/previous2.png' %}" style="max-width: 40px;"></i></a>
+            <br>
+
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <div class="form__field">
+                    <label for="">{{form.topic.label}}</label>
+                    {{form.topic}}
+                </div>
+
+                <div class="form__field">
+                    <label for="">{{form.name.label}}</label>
+                    {{form.name}}
+                </div>
+
+                <div class="form__field">
+                    <label for="">{{form.description.label}}</label>
+                    {{form.description}}
+                </div>
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" /> <a class="btn btn--sub" href="{% url 'create-topic' %}"> Create New Topic</a>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content  %}

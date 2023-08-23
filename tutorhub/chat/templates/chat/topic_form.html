@@ -1,31 +1,31 @@
 {% extends 'main.html' %}
+
 {% load static %}
-{% block content %}
+
+{% block content  %}
 
 <!-- Main Section -->
 <main class="formPage my-xl">
     <div class="content-box">
         <div class="formWrapper">
-
-            <a href="{{request.META.HTTP_REFERER}}"><img src="{% static 'images/default-image/previous.png' %}" style="max-width: 30px;"/></a>
-
-            <h2>Message Form</h2>
+            <a href="{% url 'all-rooms' %}"><i class="im im-angle-left"><img src="{% static 'images/default-image/previous.png' %}" style="max-width: 40px;"></i></a>
             <br>
 
-            <form class="form" method="POST" >
+            <form class="form" method="POST">
                 {% csrf_token %}
+
                 {% for field in form %}
+
                 <div class="form__field">
                     <label for="formInput#text">{{field.label}}</label>
                     {{field}}
                 </div>
                 {% endfor %}
+
                 
                 <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
             </form>
-
         </div>
     </div>
 </main>
-
 {% endblock content  %}

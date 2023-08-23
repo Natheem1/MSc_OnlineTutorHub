@@ -329,12 +329,17 @@ def addIntrestedSubject(request):
 @login_required(login_url='login')
 def inbox(request):
     current_user = request.user  
-    all_users = NewUser.objects.all()
+   
+   # Checks if the user is a student or tutor and then redirects them 
+    if current_user.user_type == 'student':
+        profilepk = current_user.studentprofile.pk
+    else:
+        profilepk = None
 
     messageRequests = current_user.received_messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
 
-    context = {'messageRequests':messageRequests,'unreadCount': unreadCount }
+    context = {'messageRequests':messageRequests,'unreadCount': unreadCount, 'profilepk':profilepk }
     return render(request, 'userprofile/inbox.html', context)
 
 

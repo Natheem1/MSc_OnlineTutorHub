@@ -20,16 +20,8 @@
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="{% url 'student-profiles' %}" method="GET">
-            <div class="form__field">
-              <label for="formInput#search">Search by Subjects & Tutors</label>
-              <input class="input input--text" id="formInput#search" type="text" name="search_query"
-                value="{{search_query}}" placeholder="Search by Subjects/Tutors" />
-            </div>
-
-            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
-          </form>
-        </div>
+          <a href="{% url 'all-rooms' %}" class="btn btn--sub btn--lg">STUDENT CHAT ROOMS</a>
+        </div> 
       </div>
     </section>
     

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.db.models import Q
 from .models import Subject, Tag, Review
 from .forms import SubjectForm, ReviewForm
@@ -43,7 +42,7 @@ def subject(request, pk):
         review.subject = subjectObj
         review.owner = request.user.studentprofile
 
-        # Check if the user has submitted a review for the specific subject in the last 2 hours
+        # Checks if the user has submitted a review for the specific subject in the last 2 hours
         last_review = Review.objects.filter(owner=request.user.studentprofile, subject=subjectObj).order_by('-created').first()
         if last_review:
             time_since_last_review = timezone.now() - last_review.created

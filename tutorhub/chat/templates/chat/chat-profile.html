@@ -1,0 +1,61 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block content %}
+<head>
+  <!-- Student chat rooms css file  -->
+<link rel='stylesheet' type='text/css' href="{% static 'styles/chat.css' %}"/>
+</head>
+
+
+<main class="profile-page layout layout--3">
+  <div class="container__profile">
+    <!-- Topics Start -->
+    {% include 'chat/topics_comp.html' %}
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="profile__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{{ user.profile_image.url }}" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <h3>{{user.username|capfirst}}</h3>
+          <p>@{{user.username|capfirst}}</p>
+          {% if request.user == user%}
+          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          {% endif %}
+        </div>
+        <div class="profile__about">
+          <h3>About</h3>
+          <p>
+            {% if user.bio %}
+            {{ user.bio }}
+            {% else %}
+            No bio available.
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="roomList__header">
+        <div>
+          <h2>Study Rooms Hosted by {{user.username|capfirst}}</a>
+          </h2>
+        </div>
+      </div>
+      {% include 'chat/feed_comp.html' %}
+
+      
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    {% include 'chat/activity_comp.html' %}
+    <!-- Activities End -->
+  </div>
+</main>
+{% endblock content %}

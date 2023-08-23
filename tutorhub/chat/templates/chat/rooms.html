@@ -1,0 +1,54 @@
+{% extends 'main.html'%}
+{% load static %}
+
+
+{% block content %}
+
+<head>
+    <!-- Student chat rooms css file  -->
+<link rel='stylesheet' type='text/css' href="{% static 'styles/chat.css' %}"/>
+</head>
+
+
+<main class="layout layout--3">
+    <div class="container__chat">
+
+ <!-- Topics Start -->
+ {% include 'chat/topics_comp.html' %}
+ <!-- Topics End -->
+
+ <!-- Room List Start -->
+    <div class="roomList">
+        <div class="mobile-menu">
+        <form action="{% url 'all-rooms'%}" method="GET" class="header__search">
+            <label>
+            <input name="q" placeholder="Search for posts" />
+            </label>
+        </form>
+        <div class="mobile-menuItems">
+            <a class="btn btn--main btn--pill" href="">Browse Topics</a>
+            <a class="btn btn--main btn--pill" href="">Recent Activities</a>
+        </div>
+        </div>
+
+        <div class="roomList__header">
+        <div>
+            <h2 style="color: black;">Study Room's</h2>
+            <p> {{room_count}} Rooms available</p>
+        </div>
+
+        <a class="btn btn--main" href="{% url 'create-room' %}">
+            Create Study Room
+        </a>
+        </div>  
+        
+        {% include 'chat/feed_comp.html' %}
+    </div>
+
+     <!-- Activities Start -->
+     {% include 'chat/activity_comp.html' %}
+     <!-- Activities End -->
+
+</div>
+</main>
+{% endblock content %}
