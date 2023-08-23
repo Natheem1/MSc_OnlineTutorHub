@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from users.forms import MyUserCreationForm, TutorProfileForm, StudentProfileForm, TeachSubjectForm, InterestedSubjectForm, StudentProfileParentForm, TutorIDForm, TutorDegreeForm, MessageForm, MessageReplyForm
 from django.db import IntegrityError
-from .utils import searchTutors
+from .utils import searchTutors, paginateTutorProfiles, paginateStudentProfiles, searchStudents
 from users.models import NewUser
 from . models import TutorProfile, StudentProfile, MainSubjSkill, Message
 
@@ -82,11 +82,12 @@ def registerUser(request):
     return render(request, 'userprofile/login-signup.html', context)
 
 
-#ALL TUTOR PROFILES WITH SEARCH FUNCTION - DONE
+#ALL TUTOR PROFILES WITH SEARCH & PAGE NUMBER FUNCTIONS - DONE
 def tutorProfiles(request):
     tutors, search_query = searchTutors(request)
+    page_number_range, tutors = paginateTutorProfiles (request, tutors, 3)
     
-    context = {'tutors': tutors, 'search_query': search_query}
+    context = {'tutors': tutors, 'search_query': search_query, 'page_number_range': page_number_range}
     return render(request, 'userprofile/tutorprofile/tutor-profiles.html', context)
 
 
@@ -244,11 +245,14 @@ def deleteTeachSubject(request, pk):
 
 
 
-#ALL STUDENT PROFILES 
+#ALL STUDENT PROFILES WITH SEARCH & PAGE NUMBER FUNCTIONS - DONE
 def studentProfiles(request):
-    students = StudentProfile.objects.all()
-    context = {'students': students}
+    students, search_qurey = searchStudents(request)
+    page_number_range, students = paginateStudentProfiles (request, students, 3)
+
+    context = {'students': students, 'search_query': search_qurey, 'page_number_range':page_number_range}
     return render (request, 'userprofile/studentprofile/student-profiles.html', context)
+
 
 #SINGLE STUDENT PROFILE
 def studentProfile(request,pk):

@@ -3,9 +3,8 @@ from django.db.models import Q
 from .models import Subject, Tag, Review
 from .forms import SubjectForm, ReviewForm
 from django.contrib import messages
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
-from .utils import searchsubjects
+from .utils import searchsubjects, paginateSubjects
 from datetime import timedelta
 from django.utils import timezone
 
@@ -13,22 +12,11 @@ from django.utils import timezone
 
 def subjects(request):
     subjects, search_query = searchsubjects(request)
-
-    page = request.GET.get('page') 
-    results = 6
-    paginator = Paginator(subjects, results)
-
-    try:
-        subjects = paginator.page(page)
-    except PageNotAnInteger:
-        page = 1
-        subjects = paginator.page(page)
-    except EmptyPage:
-        page = paginator.num_pages
-        subjects = paginator.page(page)
+    page_number_range, subjects = paginateSubjects(request, subjects, 6)
     
-    context = {'subjects': subjects, 'search_qurey': search_query, 'paginator': paginator}
-    return render(request, 'subjects/subjects.html', {'subjects':subjects})
+    context = {'subjects': subjects, 'search_qurey': search_query, 'page_number_range': page_number_range}
+    return render(request, 'subjects/subjects.html', context)
+
 
 
 def subject(request, pk):

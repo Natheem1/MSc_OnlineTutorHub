@@ -60,5 +60,7 @@
       </div>
     </section>
 
+    {% include 'pagenumbers.html' with queryset=tutors page_range=page_number_range %}
+
   </main>
 {% endblock content %}
