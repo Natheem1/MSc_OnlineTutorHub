@@ -1,18 +1,20 @@
 {% extends 'main.html'%}
-
+{% load static %}
 {% block content %}
 
 <!-- Main Section -->
 <main class="formPage my-xl">
     <div class="content-box">
         <div class="formWrapper">
-            <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+            <a href="{{request.META.HTTP_REFERER}}">
+                <img src="{% static 'images/default-image/previous.png' %}" style="max-width: 30px;"/>
+            </a>
             <br>
 
             <form class="form" method="POST">
                 {% csrf_token %}
                 <p>Are you sure you want to delete "{{object}}"?</p>
-                <a class="btn btn--sub btn--lg  my-md" href="{% url 'subjects' %}">Go Back</a>
+                <a class="btn btn--sub btn--lg  my-md" href="{{request.META.HTTP_REFERER}}">Go Back</a>
 
                 
                 <input class="btn btn--sub btn--lg  my-md" type="submit" value="Confirm" />

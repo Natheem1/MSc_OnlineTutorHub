@@ -480,6 +480,15 @@ a {
   font-weight: var(--font-medium);
 }
 
+.tutor__name {
+  padding-bottom: 2px;
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+  font-weight: var(--font-medium);
+  display: block
+}
+
 /*=======================
  Fonts Section
 ========================*/
@@ -632,6 +641,14 @@ Button Section
   padding: 1.2rem 4.5rem;
 }
 
+.btn--lgchat {
+  font-size: 1.8rem;
+  padding: 1.2rem 4.5rem;
+  margin-top: 4rem;
+  background-color: white;
+  color: black;
+}
+
 .btn--lgs {
   font-size: 1.8rem;
   margin-top: 1rem;
@@ -733,6 +750,15 @@ Grid Section
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: stretch;
+}
+
+.gridt {
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    max-height: calc(115vh - 400px);
+    overflow-y: auto;
 }
 
 .grid > .column {

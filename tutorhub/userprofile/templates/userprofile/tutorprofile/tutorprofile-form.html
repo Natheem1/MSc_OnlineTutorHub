@@ -1,12 +1,12 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 
 <!-- Main Section -->
 <main class="formPage my-xl">
     <div class="content-box">
         <div class="formWrapper">
-            <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+            <a href="{% url 'tutor-account' %}"><img src="{% static 'images/default-image/previous.png' %}" style="max-width: 30px;"/></a>
             <h2>Edit {{user.username|capfirst}}'s Profile</h2>
             <br>
 
@@ -16,7 +16,13 @@
                 <!-- Input:Text -->
                 <div class="form__field">
                     <label for="formInput#text">{{field.label}}</label>
-                    {{field}}
+                    {% if field.name == 'profile_image' %}
+                        <div class="custom-file">
+                            {{field}}
+                        </div>
+                    {% else %}
+                        {{field}}
+                    {% endif %}
                 </div>
                 {% endfor %}
                 <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />

@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 
 <!-- Main Section -->
@@ -7,7 +7,7 @@
     <div class="content-box">
         <div class="formWrapper">
 
-            <a class="backButton" href="{{request.META.HTTP_REFERER}}"><i class="im im-angle-left"></i></a>
+            <a href="{{request.META.HTTP_REFERER}}"><img src="{% static 'images/default-image/previous.png' %}" style="max-width: 30px;"/></a>
             <h2>Message Reply Form</h2>
             <h5>From:{{original_message.sender}}</h5>
             <h6>Subject: {{original_message.subject}}</h6>

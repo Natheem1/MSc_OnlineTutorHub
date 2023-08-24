@@ -10,7 +10,7 @@
         <div class="column column--1of3">
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-taccount' %}"><i class="im im-edit"></i> Edit</a>
+              <a class="tags tag--pill tag--mains settings__btn" href="{% url 'edit-taccount' %}"><img src="{% static 'images/default-image/editing.png' %}" style="max-width: 25px;"/></a>
               <img class="avatar avatar--xl dev__avatar" src="{{account.profile_image.url}}" />
               <h2 class="dev__name">{{account.name}}</h2>
               <p class="dev__title">{{account.short_intro}}</p>
@@ -20,7 +20,7 @@
 
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-tidaccount' %}"><i class="im im-edit"></i> Upload</a>
+              <a class="tags tag--pill tag--mains settings__btn" href="{% url 'edit-tidaccount' %}"><img src="{% static 'images/default-image/upload.png' %}" style="max-width: 25px;"/></a>
               <h6>Identification</h6>
                 <img src="{% static 'images/default-image/identification.png' %}" style="height: 150px; width: 160px;"/>
                 <a class="default__message" href="{% url 'view-tutorid' %}">View ID</a>
@@ -29,7 +29,7 @@
 
           <div class="card text-center">
             <div class="card__body dev">
-              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-tdegreeaccount' %}"><i class="im im-edit"></i> Upload</a>
+              <a class="tags tag--pill tag--mains settings__btn" href="{% url 'edit-tdegreeaccount' %}"><img src="{% static 'images/default-image/upload.png' %}" style="max-width: 25px;"/></a>
               <h6>Degree</h6>
                 <img src="{% static 'images/default-image/degree.png' %}" style="height: 150px; width: 160px; margin-top: 1rem;"/>
                 <a class="default__message" href="{% url 'view-tutordegree' %}">View Degree</a>
@@ -46,7 +46,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Main Subjects</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{%  url 'add-teach-subject' %}"><i class="im im-plus"></i> Add Subject</a>
+            <a class="tag tag--pill tag--suba settings__btn tag--lga" href="{%  url 'add-teach-subject' %}"><img src="{% static 'images/default-image/add.png' %}" style="max-width: 15px; margin-right: 1rem;"/> Add Subject</a>
           </div>
 
           <table class="settings__table">
@@ -59,8 +59,8 @@
                 </p>
               </td>
               <td class="settings__tableActions">
-                <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-teach-subject' teaching.id %}"><i class="im im-edit"></i> Edit</a>
-                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-teach-subject' teaching.id%}"><i class="im im-x-mark-circle-o"></i>
+                <a class="tag tag--pill tag--maine settings__btn" href="{% url 'edit-teach-subject' teaching.id %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--maind settings__btn" href="{% url 'delete-teach-subject' teaching.id%}"><i class="im im-x-mark-circle-o"></i>
                   Delete</a>
               </td>
             </tr>
@@ -69,7 +69,7 @@
 
           <div class="settings">
             <h3 class="settings__title">Subject Ads</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'add-subject' %}"><i class="im im-plus"></i> Add Subject Ads</a>
+            <a class="tag tag--pill tag--suba settings__btn tag--lga" href="{% url 'add-subject' %}"><img src="{% static 'images/default-image/add.png' %}" style="max-width: 15px; margin-right: 1rem;"/> Add Subject Ads</a>
           </div>
 
           <table class="settings__table">
@@ -83,8 +83,8 @@
                 <p>{{subject.description | slice:"150"}}...</p>
               </td>
               <td class="settings__tableActions">
-                <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-subject' subject.id %}"><i class="im im-edit"></i> Edit</a>
-                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-subject' subject.id %}"><i class="im im-x-mark-circle-o"></i>
+                <a class="tag tag--pill tag--maine settings__btn" href="{% url 'edit-subject' subject.id %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--maind settings__btn" href="{% url 'delete-subject' subject.id %}"><i class="im im-x-mark-circle-o"></i>
                   Delete</a>
               </td>
             </tr>

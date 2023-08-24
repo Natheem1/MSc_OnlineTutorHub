@@ -66,6 +66,8 @@ def addSubject(request):
             subject = form.save(commit=False)
             subject.owner = tutorprofile
             subject.save()
+
+            messages.success(request, 'Subject Ad Successfully Created')
             return redirect('tutor-account')
         
     context = {'form': form}
@@ -82,6 +84,8 @@ def editSubject(request, pk):
         form = SubjectForm(request.POST, request.FILES, instance=subject)
         if form .is_valid():
             form.save()
+
+            messages.success(request, 'Subject Ad Successfully Updated')
             return redirect('tutor-account')
         
     context = {'form': form}
@@ -93,6 +97,10 @@ def deleteSubject(request, pk):
     subject = tutorprofile.subject_set.get(id=pk)
     if request.method == 'POST':
         subject.delete()
+
+        messages.success(request, 'Subject Ad Successfully Deleted')
         return redirect('tutor-account')
+    
+
     context = {'object': subject}
     return render(request, 'delete-template.html', context)

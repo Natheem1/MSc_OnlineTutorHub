@@ -136,6 +136,7 @@ def editTAccount(request):
             
             tutor_profile.save()
 
+            messages.success(request, 'Profile Successfully Updated')
             return redirect('tutor-account')
  
     context = {'tutorform': tutorform}
@@ -203,7 +204,7 @@ def addTeachSubject(request):
             addSubject = form.save(commit=False)
             addSubject.owner = tutorprofile
             addSubject.save()
-            messages.success(request, 'Subject added successfully')
+            messages.success(request, 'Tutor Main Subject added successfully')
             return redirect('tutor-account')
         
     context = {'form': form}
@@ -220,7 +221,7 @@ def editTeachSubject(request, pk):
         form = TeachSubjectForm(request.POST, instance=subject)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Subject Edited successfully')
+            messages.success(request, 'Tutor Main Subject Edited successfully')
             return redirect('tutor-account')
         
     context = {'form': form, 'profile':profile, 'subject':subject}
@@ -234,7 +235,7 @@ def deleteTeachSubject(request, pk):
 
     if request.method == 'POST':
         subject.delete()
-        messages.success(request, 'Subject was deleted successfully')
+        messages.success(request, 'Tutor Main Subject Deleted successfully')
         return redirect('tutor-account')
 
     context ={'subject': subject}

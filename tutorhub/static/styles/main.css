@@ -765,6 +765,23 @@ Tag Section
   cursor: pointer;
 }
 
+.tags {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.tagsp {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
+  margin-left: 10rem;
+  cursor: pointer;
+}
+
 .tag1 {
   background-color: #d8dbf7;
 }
@@ -799,6 +816,27 @@ Tag Section
   font-weight: 500;
 }
 
+tag--mains,
+.tag--mains > small {
+  background: white;
+  color: white;
+  font-weight: 800;
+}
+
+.tag--maine,
+.tag--maine > small {
+  background: green;
+  color: white;
+  font-weight: 800;
+}
+
+.tag--maind,
+.tag--maind > small {
+  background: rgb(244, 56, 56);
+  color: white;
+  font-weight: 800;
+}
+
 .tag--sub,
 .tag--sub > small {
   background: var(--color-sub-lighter);
@@ -806,9 +844,23 @@ Tag Section
   font-weight: 500;
 }
 
+.tag--suba,
+.tag--suba > small {
+  background: white;
+  color: var(--color-sub-light);
+  font-weight: 700;
+}
+
 .tag--lg {
   padding: 0.8rem 3rem;
   font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.tag--lga {
+  padding: 0.8rem 3rem;
+  font-size: 1.4rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .tag--lg:not(:last-child) {
@@ -1043,6 +1095,18 @@ Form Page Section
   Interested Tag 
 ========================*/
 
+/* Add this CSS to your stylesheet */
+.devInfo__otherSkills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the spacing between items */
+}
+/* tutor other skills tag layout style */
+.devInfo__otherSkills {
+  display: contents;
+}
+
+
 .devInfo__otherSkillss {
   display:inline-block;
   margin: 3px;
@@ -1204,6 +1268,13 @@ Form Page Section
   display: flex;
   align-items: center;
   gap: 10px; /* Adjust the gap as needed */
+}
+
+/* styles.css TutorProfile Account  */ 
+/* styles.css */
+.column-checkbox {
+  width: 250px;
+  height: 150px;
 }
 
 

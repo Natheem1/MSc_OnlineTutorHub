@@ -15,6 +15,7 @@
             <h2>Book Now </h2>
             <div class="card__body dev">
               <img class="avatar avatar--xlr" src="{{ tutorprofile.profile_image.url }}" />
+              <br>
               <a class="tutor__name" href="{% url 'tutor-profile' tutorprofile.id %}"> <h2 class="dev__name">{{ tutorprofile.name}} </h2> </a>
               <p class="dev__title">{{ tutorprofile.short_intro}}</p>
               <p class="dev__location">Based in {{ tutorprofile.location}}</p>

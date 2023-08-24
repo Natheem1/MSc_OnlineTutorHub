@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.conf import settings
+from django.core.validators import MinLengthValidator
 
 # STUDENT PROFILE TABLE
 class StudentProfile(models.Model):
@@ -66,8 +67,7 @@ class TutorProfile(models.Model):
     last_name = models.CharField(max_length=300, blank=True, null=True)
     location = models.CharField(max_length=500, blank=True, null=True)
     short_intro = models.CharField(max_length=200, blank=False, null=True)
-    bio = models.TextField(blank=False, null=True)
-    teaching_level = models.ManyToManyField('TeachingLevel', blank=False) 
+    bio = models.TextField(blank=False, null=True, validators=[MinLengthValidator(50, "Bio must be at least 50 characters long.")])
     hourly_rate = models.CharField(max_length=20, blank=True, null=True)
     teaching_subjects = models.ManyToManyField('MainSubjSkill',blank=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to='tutor-profile-img/', 
@@ -88,15 +88,13 @@ class TutorProfile(models.Model):
     def __str__(self):
         return str(self.username)
     
-    
-    
 
-
+    
 
 # SUBJECT TABLE - its for the Tutor Table/Model
 class MainSubjSkill(models.Model):
     owner = models.ForeignKey(TutorProfile, on_delete=models.CASCADE, null=True, blank=True)
-    subject_name = models.CharField(max_length=200, unique=True)
+    subject_name = models.CharField(max_length=200, unique=False)
     subject_description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, 
@@ -105,19 +103,8 @@ class MainSubjSkill(models.Model):
     def __str__(self):
         return str(self.subject_name)
 
-
-
-
-# TEACHING LEVEL TABLE - - its for the Tutor Table/Model
-class TeachingLevel(models.Model):
-    teaching_level = models.CharField(max_length=60, unique=True)
-    created = models.DateTimeField(auto_now_add=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True, 
-                          primary_key=True, editable=False)
     
-    def __str__(self):
-        return str(self.teaching_level)
-    
+
 
 class Message(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='sent_messages')

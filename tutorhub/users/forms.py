@@ -1,4 +1,4 @@
-from django.forms import ModelForm, CheckboxSelectMultiple
+from django.forms import ModelForm, CheckboxSelectMultiple, Select
 from django.contrib.auth.forms import UserCreationForm
 from .models import NewUser
 from userprofile .models import StudentProfile, TutorProfile, MainSubjSkill, Message
@@ -36,12 +36,17 @@ class TutorProfileForm(ModelForm):
     class Meta:
         model = TutorProfile
         fields = ['name', 'username','email', 'first_name', 'last_name', 'location',
-                   'short_intro', 'bio', 'teaching_level', 
+                   'short_intro', 'bio',  
                    'hourly_rate', 'profile_image'] 
         
+        labels = {
+            'bio': 'Bio - Minimum 50 Character Long'
+        }
+        
         widgets = {
-            'teaching_level': CheckboxSelectMultiple,
+            'teaching_level': CheckboxSelectMultiple(attrs={'class': 'column-checkbox'}),
             'teaching_subjects': CheckboxSelectMultiple,
+            'profile_image': forms.ClearableFileInput(attrs={'clear_checkbox_label': ''})
         }
         
     
@@ -49,7 +54,8 @@ class TutorProfileForm(ModelForm):
         super(TutorProfileForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input'})
+            if name != 'teaching_level':
+                field.widget.attrs.update({'class': 'input'})
 
 
 
@@ -110,8 +116,11 @@ class StudentProfileParentForm(ModelForm):
 class TeachSubjectForm(ModelForm):
     class Meta:
         model = MainSubjSkill
-        fields = '__all__'
-        exclude = ['owner']
+        fields = ['subject_name', 'subject_description']
+        
+        labels = {
+            'subject_name': 'Subject Title ', 'subject_description': 'Subject Description - Tell Us Something About The Subject You Teach'
+        }
         
     def __init__(self,*args, **kwargs):
         super(TeachSubjectForm, self).__init__(*args, **kwargs)
@@ -142,7 +151,7 @@ class MessageForm(ModelForm):
         fields = ['subject', 'body',]
 
         labels = {
-            'subject': 'Reason For Messaging',
+            'subject': 'Reason For Messaging', 'body': 'Write Your Message Below'
         }
 
 
@@ -155,7 +164,11 @@ class MessageForm(ModelForm):
 class MessageReplyForm(ModelForm):
     class Meta:
         model = Message
-        fields = ['body',]
+        fields = ['body']
+
+        labels = {
+            'body': 'Write Your Message Below'
+        }
 
     def __init__(self,*args, **kwargs):
         super(MessageReplyForm, self).__init__(*args, **kwargs)

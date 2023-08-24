@@ -7,16 +7,23 @@ class SubjectForm(ModelForm):
         model = Subject
         fields = ['title', 'subject_image','description',  'tags']
 
-        widgets = {
-            'tags': forms.CheckboxSelectMultiple(),
+        labels = {
+            'title': 'Subject Ad Title', 'subject_image': 'Subject Ad Image - Add to Attract Students', 
+            'description': 'Subject Ad Description - Tell Us About Your Subject And Really Sell Your Self', 
+            'tags': 'Subject Features - HOLD Ctrl or Cmd ⌘ To Select Items'
         }
+
+        
 
     
     def __init__(self, *args, **kwargs):
         super(SubjectForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input'})
+            if name != 'tags':
+                field.widget.attrs.update({'class': 'input'})
+            else:
+                field.widget.attrs.update({'class': 'column-checkbox'})
 
 
 class ReviewForm(ModelForm):
