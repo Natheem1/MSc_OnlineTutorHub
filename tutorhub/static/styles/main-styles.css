@@ -649,6 +649,25 @@ Button Section
   color: black;
 }
 
+.btn--lgvchat {
+  font-size: 1.8rem;
+  padding: 1.2rem 6.5rem;
+  margin-top: 4rem;
+  background-color: rgb(88, 46, 180);
+  color: white;
+  margin-left: 7rem;
+}
+
+.btn--lgvchat1 {
+  font-size: 1.8rem;
+  padding: 1.2rem 6.5rem;
+  margin-top: 4rem;
+  background-color: #007bff;
+  color: white;
+  margin-left: 3rem;
+}
+
+
 .btn--lgs {
   font-size: 1.8rem;
   margin-top: 1rem;

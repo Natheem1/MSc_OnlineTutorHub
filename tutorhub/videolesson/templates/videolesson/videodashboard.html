@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="joindashboard1">
+    <div class="joincard1">
+        <h2>Create Your Lesson, {{tutor.first_name}}</h2>
+        <a href="{% url 'create-lesson' %}" class="btn btn--sub btn--lgvchat1"> Create New Meeting</a>
+    </div>
+</div>
+{% endblock content  %}

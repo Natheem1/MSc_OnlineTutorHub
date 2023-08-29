@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="joindashboard">
+    <div class="joincard">
+        <h2> Join Your Lesson</h2>
+        <form action="{% url 'join-lesson' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter room ID" name="roomID">
+            <input type="submit" class="button" value="Join" >
+        </form>
+    </div>
+</div>
+{% endblock content  %}
