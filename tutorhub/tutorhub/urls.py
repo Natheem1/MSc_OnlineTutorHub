@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('subjects.urls')),
     path('', include('userprofile.urls')),
     path('', include('chat.urls')),
+    path('', include('videolesson.urls')),
 ]
 
 

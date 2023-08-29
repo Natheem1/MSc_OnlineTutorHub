@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "userprofile.apps.UserprofileConfig",
     "chat.apps.ChatConfig",
+    "videolesson.apps.VideolessonConfig",
 ]
 
 MIDDLEWARE = [
