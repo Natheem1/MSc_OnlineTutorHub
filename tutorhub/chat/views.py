@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django .db .models import Q
 from .models import Room, Topic, ChatMessage
-from .forms import RoomForm, TopicForm
+from .forms import CreateRoomForm, TopicForm, UpdateRoomForm
 from userprofile .models import StudentProfile
 
 #All Chat Rooms 
@@ -14,14 +14,22 @@ def AllChatRooms(request):
          Q(topic__name__icontains=q) | 
          Q(name__icontains=q) |
          Q(description__icontains=q)
-         )
+    )
     
     topics = Topic.objects.all()[0:5]
-    room_count = rooms.count()
+    # room_count = rooms.count()
+    room_count = Room.objects.count()
     room_messages = ChatMessage.objects.filter(Q(room__topic__name__icontains=q))
 
+    # Calculate room counts for each topic
+    topic_room_counts = {}
+    for topic in topics:
+        topic_filtered_rooms = rooms.filter(topic=topic)
+        topic_room_counts[topic] = topic_filtered_rooms.count()
+
     context = {'rooms': rooms, 'topics': topics, 
-                'room_count': room_count, 'room_messages': room_messages}
+                'room_count': room_count, 'room_messages': room_messages,
+                'topic_room_counts': topic_room_counts}
     return render(request, 'chat/rooms.html', context)
 
 
@@ -80,7 +88,7 @@ def createTopic(request):
 @login_required(login_url='login')
 def createRoom(request):
     if request.method == 'POST':
-        form = RoomForm(request.POST)
+        form = CreateRoomForm(request.POST)
         if form.is_valid():
             topic = form.cleaned_data['topic'] 
             room = form.save(commit=False)
@@ -89,34 +97,28 @@ def createRoom(request):
             messages.success(request, 'Room Created Successfully')
             return redirect('all-rooms')
     else:
-        form = RoomForm()
+        form = CreateRoomForm()
     
     topics = Topic.objects.all()
     context = {'form': form, 'topics': topics}
-    return render(request, 'chat/room_form.html', context)
+    return render(request, 'chat/createroom_form.html', context)
 
-
-
-
-
+# Update Room
 @login_required(login_url='login')
 def updateRoom(request, pk):
-     room = Room.objects.get(id=pk)
-     form = RoomForm(instance=room)
-     topics = Topic.objects.all()
+    room = get_object_or_404(Room, id=pk)
+    topic = room.topic
 
-     if request.method == 'POST':
-         topic_name = request.POST.get('topic')
-         topic, created = Topic.objects.get_or_create(name=topic_name)
-         room.name = request.POST.get('name')
-         room.topic = topic
-         room.description = request.POST.get('description')
-         room.save()
-         return redirect('all-rooms')
-
-     context = {'form': form, 'topics': topics, 'room': room}
-     return render(request, 'chat/room_form.html', context)
-
+    if request.method == 'POST':
+        form = UpdateRoomForm(request.POST, instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('all-rooms')
+    else:
+        form = UpdateRoomForm(instance=room)
+    
+    context = {'form': form, 'topic': topic, 'room': room}
+    return render(request, 'chat/updateroom_form.html', context)
 
 
 

@@ -1,19 +1,22 @@
 {% load static %}
 <div class="topics">
-    <div class="topics__header">
-      <h2>Browse Topics</h2>
-    </div>
-    <ul class="topics__list">
-      <li>
-        <a href="{% url 'all-rooms' %}" class="active">All <span>{{room_count}}</span></a>
-      </li>
-      {% for topic in topics %}
-      <li>
-        <a href="{% url 'all-rooms' %}?q={{ topic.name }}">{{ topic.name }}<span>{{topic.room_set.all.count}}</span></a>
-      </li>
-      {% endfor %}
-    </ul>
-    <a class="btn2 btn--link" href="{% url 'topics' %}">
-      More <img src="{% static 'images/default-image/chevron.png'%}" style="max-width: 20px;" >
-    </a>
+  <div class="topics__header">
+    <h2>Browse Topics</h2>
   </div>
+  <ul class="topics__list">
+    <li>
+      <a href="{% url 'all-rooms' %}" class="active">All <span>{{ room_count }}</span></a>
+    </li>
+    {% for topic in topics %}
+    <li>
+      <a href="{% url 'all-rooms' %}?q={{ topic.name }}">{{ topic.name }}<span>{{ topic_room_counts.topic }}</span></a>
+    </li>
+    {% endfor %}
+  </ul>
+  <a class="btn2 btn--link" href="{% url 'topics' %}">
+    More <img src="{% static 'images/default-image/chevron.png' %}" style="max-width: 20px;">
+  </a>
+</div>
+
+
+

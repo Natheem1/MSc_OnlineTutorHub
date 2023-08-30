@@ -1054,7 +1054,7 @@ a {
   padding: 2rem;
   position: absolute;
   z-index: 111;
-  bottom: 0;
+  bottom: -20px;
   left: 0;
   right: 0;
   background: transparent;

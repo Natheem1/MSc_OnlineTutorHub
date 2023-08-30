@@ -9,6 +9,15 @@
 /*=======================
 Header/Navigation Section
 ========================*/
+
+.tutormainlogo {
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  margin-left: 1rem;
+}
+
+
 .header {
   position: sticky;
   z-index: 111;
@@ -40,7 +49,7 @@ Header/Navigation Section
   display: inline-flex;
   align-items: center;
   list-style: none;
-  gap: 4rem;
+  gap: 3rem;
 }
 
 .header__menuItem > a {
@@ -1234,6 +1243,17 @@ Form Page Section
   border-top: 1px solid #ccc;
 }
 
+.input1 {
+  display: inherit;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.radio-buttons {
+  display: inline-flex;
+  gap: 10px;
+}
+
 .input input {
   flex: 1;
   padding: 8px;
@@ -1277,6 +1297,98 @@ Form Page Section
   height: 150px;
 }
 
+
+
+/* Video Chat Section Join Meeting STUDENT */
+
+.dashboard > .card {
+  padding: 3rem 4rem;
+  width: 95%;
+  max-width: 50rem;
+  margin-left: 45rem;
+}
+  
+
+.dashboard::after {
+  z-index: -1;
+  opacity: 0.1;
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url(../images/main-logo/pattern2.jpg);
+}
+
+
+
+.joindashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background: url(../images/main-logo/pattern1.jpg);
+}
+
+.joincard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 500px;
+}
+
+.joincard header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.joincard form {
+  display: flex;
+  flex-direction: column;
+}
+
+.joincard input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.joincard input[type="submit"] {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.joincard input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.joincard center {
+  margin-top: 15px;
+}
+
+.joincard p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.joincard p.success {
+  color: green;
+}
+
+.joincard p.error {
+  color: red;
+}
 
 /*================================
   Video Lesson Pages Styling  

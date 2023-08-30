@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -7,7 +8,7 @@
 <main class="formPage my-xl">
     <div class="content-box">
         <div class="formWrapper">
-            <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+            <a href="{% url 'student-account' %}"><img src="{% static 'images/default-image/previous.png' %}" style="max-width: 30px;"/></a>
             <br>
             <h6>Add the Subject your Interested In</h6>
             <form class="form" method="POST">

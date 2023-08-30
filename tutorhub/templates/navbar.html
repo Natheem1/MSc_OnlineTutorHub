@@ -2,8 +2,8 @@
 
 
 <header class="header">
+  <a href="{% url 'subjects' %}"> <img class="tutormainlogo" src="{% static 'images/main-logo/puzzle1.png'%}" alt="TutorHub Logo" /></a>
     <div class="container container--narrow">
-      <a class="header__logo" href="{% url 'subjects' %}" > <img src="{% static 'images/main-logo/puzzle1.png'%}" alt="TutorHub Logo" />
       </a>
       
       <nav class="header__nav">
@@ -16,22 +16,22 @@
           {% if request.user.is_authenticated %}
             {% if request.user.user_type == 'tutor' %}
             <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox </a></li>
+            <li class="header__menuItem"><a href="{% url 'video-dashboard' %}">Create Video Lesson </a></li>
                 <li class="header__menuItem dropdown">
-                    <a href="#"  class="btn btn--sub1">Account</a>
+                    <a href="#"  class="btn btn--sub1">Dashboard</a>
                     <ul class="dropdown-menutut">
-                        <li><a href="{% url 'video-dashboard' %}">Video Lesson</a></li>
-                        <li><a href="{% url 'tutor-account' %}">Tutor Account</a></li>
+                        <li><a href="{% url 'tutor-account' %}">My Account</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </li>
             {% else %}
             <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox </a></li>
             <li class="header__menuItem"><a href="{% url 'join-lesson' %}">Join Lesson </a></li>
+            <li class="header__menuItem"><a href="{% url 'student-profiles' %}">Fellow Peers </a></li>
                 <li class="header__menuItem dropdown">
                     <a href="#" class="btn btn--sub1">Account</a>
                     <ul class="dropdown-menustu">
-                        <li><a href="{% url 'student-profiles' %}">Fellow Peers</a></li>
-                        <li><a href="{% url 'student-account' %}">Student Account</a></li>
+                        <li><a href="{% url 'student-account' %}">My Account</a></li>
                         <li><a href="{% url 'logout' %}" >Logout</a></li>
                     </ul>
                 </li>

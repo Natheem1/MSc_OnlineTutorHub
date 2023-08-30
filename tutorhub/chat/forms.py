@@ -15,7 +15,7 @@ class TopicForm(ModelForm):
 
 
 
-class RoomForm(ModelForm):
+class CreateRoomForm(ModelForm):
     class Meta:
         model = Room
         fields = ['topic', 'name', 'description',]
@@ -26,8 +26,25 @@ class RoomForm(ModelForm):
         }
 
     def __init__(self,*args, **kwargs):
-        super(RoomForm, self).__init__(*args, **kwargs)
+        super(CreateRoomForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
 
+
+
+class UpdateRoomForm(ModelForm):
+    class Meta:
+        model = Room
+        fields = ['name', 'description']
+        exclude = ['host', 'participants']
+        labels = {
+            'name': 'Create Room Name',
+            'description': 'Tell us about the Room'
+        }
+
+    def __init__(self,*args, **kwargs):
+        super(UpdateRoomForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})

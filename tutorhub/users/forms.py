@@ -26,7 +26,8 @@ class MyUserCreationForm(UserCreationForm):
         super(MyUserCreationForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input'})
+            if name != 'user_type':
+                field.widget.attrs.update({'class': 'input'})
 
 
 class TutorProfileForm(ModelForm):
@@ -132,7 +133,7 @@ class TeachSubjectForm(ModelForm):
 class InterestedSubjectForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        fields = ['interested_subjects']  # Only the interested_subjects field
+        fields = ['interested_subjects']  
 
         widgets = {
             'interested_subjects': CheckboxSelectMultiple,
@@ -140,9 +141,9 @@ class InterestedSubjectForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(InterestedSubjectForm, self).__init__(*args, **kwargs)
-        # Customize the form as needed
+        
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input'})
+            field.widget.attrs.update({'class': 'input1'})
 
 
 class MessageForm(ModelForm):

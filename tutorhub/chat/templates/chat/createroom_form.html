@@ -7,6 +7,7 @@
 <!-- Main Section -->
 <main class="formPage my-xl">
     <div class="content-box">
+        <h2> Create Chat Study Room</h2>
         <div class="formWrapper">
             <a href="{% url 'all-rooms' %}"><i class="im im-angle-left"><img src="{% static 'images/default-image/previous2.png' %}" style="max-width: 40px;"></i></a>
             <br>
@@ -17,7 +18,8 @@
                     <label for="">{{form.topic.label}}</label>
                     {{form.topic}}
                 </div>
-
+                <a class="btn btn--sub" href="{% url 'create-topic' %}"> Create New Topic</a>
+                
                 <div class="form__field">
                     <label for="">{{form.name.label}}</label>
                     {{form.name}}
@@ -27,7 +29,7 @@
                     <label for="">{{form.description.label}}</label>
                     {{form.description}}
                 </div>
-                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" /> <a class="btn btn--sub" href="{% url 'create-topic' %}"> Create New Topic</a>
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" /> 
             </form>
         </div>
     </div>

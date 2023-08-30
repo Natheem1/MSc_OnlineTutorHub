@@ -15,15 +15,14 @@
         <div class="room">
         <div class="room__top">
             <div class="room__topLeft">
-                <a href="{% url 'all-rooms' %}"><i class="im im-angle-left"><img src="{% static 'images/default-image/previous2.png' %}" style="max-width: 30px;"></i></a>
-            </a>
+                <a href="{% url 'all-rooms' %}"><i class="im im-angle-left"><img src="{% static 'images/default-image/previouswhite1.png' %}" style="max-width: 35px; color: white;"></i></a>
             <h3>TutorHub Chat Room</h3>
             </div>
 
             {% if room.host == request.user.studentprofile %}
             <div class="room__topRight">
-            <a href="{% url 'update-room' room.id %}"><img src="{% static 'images/default-image/update.png'%}" style="max-width: 24px;"> </a>
-            <a href="{% url 'delete-room' room.id %}" style="color: red; max-width: 30px;" >X</a>
+                <a href="{% url 'update-room' room.id %}"> <img src="{% static 'images/default-image/editingwhite.png'%}" style="max-width: 25px;"> </a>
+                <a href="{% url 'delete-room' room.id %}"> <img src="{% static 'images/default-image/delete.png'%}" style="max-width: 24px;"> </a>
             </div>
             {% endif %}
         </div>
@@ -81,12 +80,16 @@
             </div>
             </div>
         </div>
-        <div class="room__message">
-            <form action="" method="POST">
-            {% csrf_token%}
-            <input name="body" placeholder="Write your message here..." />
+        <div class="room__message" style="display: flex; align-items: center;">
+            <form action="" method="POST" style="flex: 1; display: flex;">
+                {% csrf_token %}
+                <input name="body" placeholder="Write your message here..." style="flex: 1;" />
+                <button type="submit" style="border: none; background-color: transparent;">
+                    <img src="{% static 'images/default-image/sendr.png' %}" style="max-width: 40px; margin-left: 0.5rem;">
+                </button>
             </form>
         </div>
+        
         </div>
         <!-- Room End -->
 
