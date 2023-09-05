@@ -1252,6 +1252,7 @@ Form Page Section
 .radio-buttons {
   display: inline-flex;
   gap: 10px;
+  border-top: 2px solid #06d12f;
 }
 
 .input input {
