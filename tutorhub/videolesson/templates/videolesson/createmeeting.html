@@ -35,18 +35,20 @@ window.onload = function () {
         // @param 5: Username
     const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
     const userID = Math.floor(Math.random() * 10000) + "";
-    const userName = "{{user.tutorprofile.first_name}}" +  "{{user.tutorprofile.last_name}}" + userID ;
+    const userName = "{{user.first_name}}";
     const appID = 745997730;
     const serverSecret = "883a2ecb41669eeccb733bf3b5492c89";
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
 
     
         const zp = ZegoUIKitPrebuilt.create(kitToken);
+        const roomLink = roomID;
+
         zp.joinRoom({
             container: document.querySelector("#root"),
             sharedLinks: [{
-                name: 'Personal link',
-                url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+                name: 'Personal link / RoomID: Send To Student',
+                url: roomLink,
             }],
             scenario: {
                 mode: ZegoUIKitPrebuilt.VideoConference,
